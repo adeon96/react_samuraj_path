@@ -1,0 +1,19 @@
+.sidebar {
+  background-color: lightsalmon;
+  margin: 0;
+  padding: 0;
+}
+
+.sidebar > nav > ul {
+  list-style-type: none;
+  padding-left: 20px;
+}
+
+.sidebar > nav > ul > li> a {
+  text-decoration: none;
+  color: #000;
+}
+
+.item {
+  margin-left: 10px;
+}
