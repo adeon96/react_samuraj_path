@@ -1,0 +1,10 @@
+.user__item {
+  display: flex;
+  align-items: center;
+}
+
+.user__item img {
+  width: 40px;
+  height: 40px;
+  border-radius: 100%;
+}
