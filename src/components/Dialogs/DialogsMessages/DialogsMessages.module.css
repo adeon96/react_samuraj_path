@@ -1,0 +1,7 @@
+.dialogues__messages {
+  background-color: #e6eaea;
+  border-radius: 0 10px 10px 0;
+  display: flex;
+  flex-direction: column;
+  padding: 10px 15px;
+}

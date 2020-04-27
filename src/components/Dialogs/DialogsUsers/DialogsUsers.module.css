@@ -1,11 +1,5 @@
 .dialogues__users {
   background-color: #2c3e50;
   border-radius: 10px 0 0 10px;
-  padding-left: 17px;
-}
-
-.dialogues__users h5 {
-  color: #f5f5f5;
-  font-weight: normal;
-  margin-left: 7px;
+  padding-top: 8px;
 }

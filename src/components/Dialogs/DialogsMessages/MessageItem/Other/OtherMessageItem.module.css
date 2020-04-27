@@ -1,0 +1,9 @@
+.message__item_other {
+  justify-content: flex-end;
+}
+
+.message__text_other {
+  background-color: #f5f5f5;
+  margin-right: 10px;
+  color: #384b7b;
+}

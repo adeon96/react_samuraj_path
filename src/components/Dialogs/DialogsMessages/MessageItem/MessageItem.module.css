@@ -1,0 +1,23 @@
+.message__item {
+  display: flex;
+  margin: 15px 0px;
+  align-items: flex-start;
+}
+
+.message__item img {
+  width: 20px;
+  height: 20px;
+  border-radius: 100%;
+}
+
+.message__text {
+  padding: 10px;
+  border-radius: 15px;
+  max-width: 40%;
+}
+
+.message__text p {
+  margin: 0;
+  padding: 0;
+  font-size: 12px;
+}
