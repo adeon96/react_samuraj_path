@@ -1,10 +1,11 @@
-.app-wrapper {
+.app__wrapper {
   display: grid;
   max-width: 1000px;
   grid-template-columns: 1fr 4fr;
   margin: 10px auto;
 }
 
-.app-wrapper-content {
-  background-color: deepskyblue;
+.app__wrapper__content {
+  background-color: lightcyan;
+  padding: 10px 20px;
 }

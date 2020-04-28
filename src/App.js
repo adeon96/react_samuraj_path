@@ -15,10 +15,10 @@ import { BrowserRouter, Route } from 'react-router-dom';
 const App = () => {
   return (
     <BrowserRouter>
-      <div className='app-wrapper'>
+      <div className='app__wrapper'>
         <Header />
         <Sidebar />
-        <div className='app-wrapper-content'>
+        <div className='app__wrapper__content'>
           <Route path='/profile' component={Profile} />
           <Route path='/dialogs' component={Dialogs} />
           <Route path='/news' component={News} />

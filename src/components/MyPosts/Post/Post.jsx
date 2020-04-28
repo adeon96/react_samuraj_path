@@ -4,9 +4,13 @@ import styles from './Post.module.css';
 const Post = (props) => {
   return (
     <div className={styles.post}>
-      <img src="https://i1.wp.com/sova.ponominalu.ru/wp-content/uploads/2019/08/ava-max.jpg?fit=2000%2C1333&ssl=1" alt="sweeet" />
-      <p>{props.msg}</p>
-      <p>Likes: {props.likes * 10}</p>
+      <div className={styles.post__image}>
+        <img src="https://blogmedia.evbstatic.com/wp-content/uploads/rally-legacy/2019/09/11020650/1DERAp_t20_n08Ek4-1500x750.jpg" alt="sweeet" />
+      </div>
+
+      <div className={styles.post__text}>
+        <p>{props.msg}</p>
+      </div>
     </div>
   );
 }

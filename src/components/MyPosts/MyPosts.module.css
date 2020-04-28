@@ -1,4 +1,19 @@
 .myPosts {
-  margin: 10px 20px;
   padding: 10px 20px;
+  margin-top: 20px;
+}
+
+.form__textarea {
+  width: 100%;
+  height: 100px;
+}
+
+.form__button {
+  background-color: lightskyblue;
+  border-radius: 10px;
+  padding: 10px 20px;
+}
+
+.myPosts__items {
+  margin-top: 60px;
 }
