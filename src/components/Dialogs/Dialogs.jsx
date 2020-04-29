@@ -3,13 +3,16 @@ import styles from './Dialogs.module.css'
 import DialogsUsers from './DialogsUsers/DialogsUsers';
 import DialogsMessages from './DialogsMessages/DialogsMessages';
 
+
 const Dialogs = (props) => {
-  return(
+
+  return (
     <div>
       <h3 className={styles.header}>Dialogs</h3>
+
       <div className={styles.dialogues}>
-        <DialogsUsers />
-        <DialogsMessages />
+        <DialogsUsers users={props.users} />
+        <DialogsMessages my_messages={props.my_messages} other_messages={props.other_messages} />
       </div>
     </div>
   );
