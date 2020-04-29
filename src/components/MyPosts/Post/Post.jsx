@@ -9,7 +9,7 @@ const Post = (props) => {
       </div>
 
       <div className={styles.post__text}>
-        <p>{props.msg}</p>
+        <p>{props.text}</p>
       </div>
     </div>
   );
