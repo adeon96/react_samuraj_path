@@ -4,13 +4,20 @@ import styles from './DialogsMessages.module.css';
 import MyMessageItem from './MessageItem/My/MyMessageItem';
 import OtherMessageItem from './MessageItem/Other/OtherMessageItem';
 
+/**
+ * 
+ * @param {*} props 
+ * 
+ * props -> messagesData
+ * props.state = messagesData
+ */
 const DialogsMessages = (props) => {
 
   let myMessages = 
-    props.my_messages.map(msg => <MyMessageItem key={msg.id} text={msg.text} />);
+    props.state.myMessagesData.map(msg => <MyMessageItem key={msg.id} text={msg.text} />);
 
   let otherMessages =
-    props.other_messages.map(msg => <OtherMessageItem key={msg.id} text={msg.text} />);
+    props.state.otherMessagesData.map(msg => <OtherMessageItem key={msg.id} text={msg.text} />);
 
   return (
     <div className={styles.dialogues__messages}>

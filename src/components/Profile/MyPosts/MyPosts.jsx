@@ -3,10 +3,12 @@ import styles from './MyPosts.module.css';
 
 import Post from './Post/Post';
 
+/* props -> array of my posts (myPostsData) */
 const MyPosts = (props) => {
 
   /* Converting array from objects to components */
-  let myPosts = props.posts.map(post => <Post key={post.id}
+  let myPosts = props.state.map(post => <Post key={post.id}
+    image={post.image}
     text={post.text.length > 200 ?
       post.text.substring(0, 200) + "... Read more" : post.text} />);
 

@@ -6,7 +6,10 @@ const Post = (props) => {
   return (
     <div className={styles.post}>
       <div className={styles.post__image}>
-        <img src="https://blogmedia.evbstatic.com/wp-content/uploads/rally-legacy/2019/09/11020650/1DERAp_t20_n08Ek4-1500x750.jpg" alt="sweeet" />
+        <img 
+          src={props.image === undefined ? 
+            'https://mypower.in.ua/wp-content/uploads/placeholder-300x200.png' : 
+            props.image} alt="sweeet" />
       </div>
 
       <div className={styles.post__text}>

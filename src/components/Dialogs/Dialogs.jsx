@@ -3,7 +3,7 @@ import styles from './Dialogs.module.css'
 import DialogsUsers from './DialogsUsers/DialogsUsers';
 import DialogsMessages from './DialogsMessages/DialogsMessages';
 
-
+/* props -> dialogsPage */
 const Dialogs = (props) => {
 
   return (
@@ -11,8 +11,9 @@ const Dialogs = (props) => {
       <h3 className={styles.header}>Dialogs</h3>
 
       <div className={styles.dialogues}>
-        <DialogsUsers users={props.users} />
-        <DialogsMessages my_messages={props.my_messages} other_messages={props.other_messages} />
+        <DialogsUsers state={props.state.dialogsUsersData} />
+        <DialogsMessages state={props.state.messagesData} />
+        {/*<DialogsMessages my_messages={props.my_messages} other_messages={props.other_messages} />*/}
       </div>
     </div>
   );

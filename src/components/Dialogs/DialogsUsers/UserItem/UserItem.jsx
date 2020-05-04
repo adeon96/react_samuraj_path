@@ -7,7 +7,9 @@ const UserItem = (props) => {
 
   return (
     <div className={styles.user__item}>
-      <img src="https://eng.mnogonotka.com/wp-content/uploads/2019/12/elman-leti-in.jpg" alt="ava" />
+      <img src={props.image === undefined ?
+        'https://mypower.in.ua/wp-content/uploads/placeholder-300x200.png' :
+        props.image} alt="ava" />
       <NavLink to={path}>{props.name}</NavLink>
     </div>
   );
