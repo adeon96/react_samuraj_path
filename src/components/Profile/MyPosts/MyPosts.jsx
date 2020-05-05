@@ -12,13 +12,24 @@ const MyPosts = (props) => {
     text={post.text.length > 200 ?
       post.text.substring(0, 200) + "... Read more" : post.text} />);
 
+
+
+  let newPostElement = React.createRef();
+
+  let addPost = () => {
+    let text = newPostElement.current.value;
+    props.addPost(text);
+    newPostElement.current.value = '';
+  }
+
   return (
     <div className={styles.myPosts}>
       <h4>My posts</h4>
 
       <div className={styles.myPosts__form}>
-        <textarea className={styles.form__textarea} placeholder="What's new?.."></textarea>
-        <button className={styles.form__button}>Add post</button>
+        <textarea ref={newPostElement}
+          className={styles.form__textarea} placeholder="What's new?.."></textarea>
+        <button onClick={addPost} className={styles.form__button}>Add post</button>
       </div>
 
       <div className={styles.myPosts__items}>

@@ -15,19 +15,21 @@ import { Route } from 'react-router-dom';
 const App = (props) => {
   return (
 
-      <div className='app__wrapper'>
-        <Header />
-        <Sidebar />
-        <div className='app__wrapper__content'>
-          <Route path='/profile' render={() => <Profile state={props.state.profilePage} />} />
+    <div className='app__wrapper'>
+      <Header />
+      <Sidebar />
+      <div className='app__wrapper__content'>
+        <Route path='/profile' render={() => <Profile
+          state={props.state.profilePage}
+          addPost={props.addPost} />} />
 
-          <Route path='/dialogs' render={() => <Dialogs state={props.state.dialogsPage} />} />
+        <Route path='/dialogs' render={() => <Dialogs state={props.state.dialogsPage} />} />
 
-          <Route path='/news' component={News} />
-          <Route path='/music' component={Music} />
-          <Route path='/settings' component={Settings} />
-        </div>
+        <Route path='/news' component={News} />
+        <Route path='/music' component={Music} />
+        <Route path='/settings' component={Settings} />
       </div>
+    </div>
 
   );
 }

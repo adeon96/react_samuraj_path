@@ -5,3 +5,15 @@
   flex-direction: column;
   padding: 10px 15px;
 }
+
+.sendForm {
+  background-color: lightcoral;
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 20px;
+}
+
+.sendForm textarea {
+  width: 100%;
+  max-width: 100%;
+}
