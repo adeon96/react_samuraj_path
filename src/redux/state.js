@@ -1,4 +1,6 @@
-import { rerenderEntireTree } from "../render";
+let rerenderEntireTree = (state) => {
+  console.log("State was changed");
+};
 
 let state = {
   profilePage: {
@@ -87,13 +89,13 @@ let state = {
 
 //Posts logic
 
-let getPostId = () => {
+const getPostId = () => {
   let postIds = state.profilePage.myPostsData.map(post => post.id);
 
   return Math.max.apply(null, postIds) + 1;
 }
 
-export let addPost = () => {
+export const addPost = () => {
   let newId = getPostId();
 
   let newPost = {
@@ -110,7 +112,7 @@ export let addPost = () => {
   rerenderEntireTree(state);
 }
 
-export let updatePostText = (newText) => {
+export const updatePostText = (newText) => {
   state.profilePage.newPostText = newText;
 
   //draw updated tree
@@ -120,13 +122,13 @@ export let updatePostText = (newText) => {
 
 //Messages logic
 
-let getMessageId = () => {
+const getMessageId = () => {
   let messageIds = state.dialogsPage.messagesData.myMessagesData.map(msg => msg.id);
 
   return Math.max.apply(null, messageIds) + 1;
 }
 
-export let addMessage = () => {
+export const addMessage = () => {
   let newId = getMessageId();
 
   let newMessage = {
@@ -143,11 +145,16 @@ export let addMessage = () => {
   rerenderEntireTree(state);
 }
 
-export let updateNewMessageText = (newMsgText) => {
+export const updateNewMessageText = (newMsgText) => {
   state.dialogsPage.messagesData.newMessageText = newMsgText;
 
   //draw updated tree
   rerenderEntireTree(state);
+}
+
+//Callback!!!
+export const subscribe = (observer) => {
+  rerenderEntireTree = observer;
 }
 
 export default state;
