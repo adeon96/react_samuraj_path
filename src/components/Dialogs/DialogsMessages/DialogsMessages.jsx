@@ -14,20 +14,26 @@ import OtherMessageItem from './MessageItem/Other/OtherMessageItem';
 const DialogsMessages = (props) => {
 
   let myMessages =
-    props.state.myMessagesData.map(msg =>
+    props.dialogsMessages.myMessagesData.map(msg =>
       <MyMessageItem key={msg.id} text={msg.text} />);
 
   let otherMessages =
-    props.state.otherMessagesData.map(msg =>
+    props.dialogsMessages.otherMessagesData.map(msg =>
       <OtherMessageItem key={msg.id} text={msg.text} />);
 
 
   let newMessageRef = React.createRef();
 
   let sendMessage = () => {
-    let msgText = newMessageRef.current.value;
-    alert(msgText);
+    props.addMessage();
   }
+
+
+  let onMessageChange = () => {
+    let msgText = newMessageRef.current.value;
+    props.updateNewMessage(msgText);
+  }
+
 
   return (
     <div className={styles.dialogues__messages}>
@@ -35,7 +41,10 @@ const DialogsMessages = (props) => {
       {otherMessages}
 
       <div className={styles.sendForm}>
-        <textarea ref={newMessageRef} placeholder='Write something...'></textarea>
+        <textarea ref={newMessageRef} 
+          placeholder='Write something...'
+          value={props.dialogsMessages.newMessageText}
+          onChange={onMessageChange} />
         <button onClick={sendMessage}>Send</button>
       </div>
     </div>

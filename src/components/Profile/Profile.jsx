@@ -7,9 +7,12 @@ import About from './About/About';
 const Profile = (props) => {
   return (
     <div>
-      
-      <About state={props.state.aboutData} />
-      <MyPosts state={props.state.myPostsData} addPost={props.addPost} />
+
+      <About state={props.profilePage.aboutData} />
+      <MyPosts state={props.profilePage.myPostsData}
+        addPost={props.addPost}
+        updateNewPost={props.updateNewPost}
+        newPostText={props.profilePage.newPostText} />
 
     </div>
   );

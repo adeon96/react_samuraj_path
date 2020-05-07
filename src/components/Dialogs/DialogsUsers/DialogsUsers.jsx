@@ -7,7 +7,7 @@ import UserItem from './UserItem/UserItem';
 const DialogsUsers = (props) => {
   
   let dialogsUsers =
-    props.state.map(user => <UserItem key={user.id} id={user.id} 
+    props.dialogsUsers.map(user => <UserItem key={user.id} id={user.id} 
       name={user.name} image={user.image} />);
 
   return(
