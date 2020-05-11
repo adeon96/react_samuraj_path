@@ -25,13 +25,13 @@ const DialogsMessages = (props) => {
   let newMessageRef = React.createRef();
 
   let sendMessage = () => {
-    props.addMessage();
+    props.store.addMessage();
   }
 
 
   let onMessageChange = () => {
     let msgText = newMessageRef.current.value;
-    props.updateNewMessage(msgText);
+    props.store.updateNewMessageText(msgText);
   }
 
 
@@ -43,7 +43,7 @@ const DialogsMessages = (props) => {
       <div className={styles.sendForm}>
         <textarea ref={newMessageRef} 
           placeholder='Write something...'
-          value={props.dialogsMessages.newMessageText}
+          value={props.store.getDefaultMessageText()}
           onChange={onMessageChange} />
         <button onClick={sendMessage}>Send</button>
       </div>

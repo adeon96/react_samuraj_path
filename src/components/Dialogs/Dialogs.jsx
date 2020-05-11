@@ -14,9 +14,7 @@ const Dialogs = (props) => {
 
       <div className={styles.dialogues}>
         <DialogsUsers dialogsUsers={props.dialogsPage.dialogsUsersData} />
-        <DialogsMessages dialogsMessages={props.dialogsPage.messagesData}
-          addMessage={props.addMessage} updateNewMessage = {props.updateNewMessage} />
-        {/*<DialogsMessages my_messages={props.my_messages} other_messages={props.other_messages} />*/}
+        <DialogsMessages store={props.store} dialogsMessages={props.dialogsPage.messagesData} />
       </div>
     </div>
   );

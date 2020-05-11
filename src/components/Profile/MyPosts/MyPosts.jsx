@@ -7,7 +7,7 @@ import Post from './Post/Post';
 const MyPosts = (props) => {
 
   /* Converting array from objects to components */
-  let myPosts = props.state.map(post => <Post key={post.id}
+  let myPosts = props.store.getAllPosts().map(post => <Post key={post.id}
     image={post.image}
     text={post.text.length > 200 ?
       post.text.substring(0, 200) + "... Read more" : post.text} />);
@@ -17,12 +17,12 @@ const MyPosts = (props) => {
   let newPostElement = React.createRef();
 
   let addPost = () => {
-    props.addPost();
+    props.store.addPost();
   }
 
   let onPostChange = () => {
     let text = newPostElement.current.value;
-    props.updateNewPost(text);
+    props.store.updatePostText(text);
   }
 
   return (
@@ -34,7 +34,7 @@ const MyPosts = (props) => {
           className={styles.form__textarea}
           placeholder="What's new?.."
           onChange={onPostChange}
-          value={props.newPostText} />
+          value={props.store.getDefaultPostText()} />
 
         <button onClick={addPost} className={styles.form__button}>Add post</button>
       </div>
