@@ -27,7 +27,7 @@ let store = {
         {
           id: 5,
           text: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum. Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum."
-        }
+        },
       ],
 
       newPostText: 'Today I have...',
@@ -84,34 +84,29 @@ let store = {
     }
   },
 
+  getState() {
+    return this._state;
+  },
+
+  subscribe(observer) {
+    this._subscriber = observer;
+  },
+
   _getPostId() {
     let postIds = this._state.profilePage.myPostsData.map(post => post.id);
-  
+
     return Math.max.apply(null, postIds) + 1;
   },
 
   _getMessageId() {
     let messageIds = this._state.dialogsPage.messagesData.myMessagesData.map(msg => msg.id);
-  
-    return Math.max.apply(null, messageIds) + 1;
-  },
 
-  /* PROFILE. ABOUT LOGIC */
-  getAboutData() {
-    return this._state.profilePage.aboutData;
+    return Math.max.apply(null, messageIds) + 1;
   },
 
   /* POSTS LOGIC */
 
-  getAllPosts() {
-    return this._state.profilePage.myPostsData;
-  },
-
-  getDefaultPostText() {
-    return this._state.profilePage.newPostText;
-  },
-
-  addPost() {
+  /*addPost() {
     let newId = this._getPostId();
   
     let newPost = {
@@ -126,52 +121,83 @@ let store = {
   
     //draw updated tree
     this._subscriber();
-  },
-  
-  updatePostText(newText) {
+  },*/
+
+  /*updatePostText(newText) {
     this._state.profilePage.newPostText = newText;
-  
+
     //draw updated tree
     this._subscriber();
-  },
+  },*/
 
   /* MESSAGE LOGIC */
 
-  getDefaultMessageText() {
-    return this._state.dialogsPage.messagesData.newMessageText;
-  },
-
-  addMessage() {
+  /*addMessage() {
     let newId = this._getMessageId();
-  
+
     let newMessage = {
       id: newId,
       text: this._state.dialogsPage.messagesData.newMessageText
     };
-  
+
     this._state.dialogsPage.messagesData.myMessagesData.push(newMessage);
-  
+
     //Clear textarea after adding new message
     this._state.dialogsPage.messagesData.newMessageText = '';
-  
+
     //draw updated tree
     this._subscriber();
-  },
+  },*/
 
-  updateNewMessageText(newMsgText) {
+  /*updateNewMessageText(newMsgText) {
     this._state.dialogsPage.messagesData.newMessageText = newMsgText;
-  
+
     //draw updated tree
     this._subscriber();
-  },
+  },*/
 
-  getState() {
-    return this._state;
-  },
+  dispatch(action) {
+    if (action.type === 'ADD-POST') {
 
-  subscribe(observer) {
-    this._subscriber = observer;
-  },
+      let newId = this._getPostId();
+
+      let newPost = {
+        id: newId,
+        text: this._state.profilePage.newPostText
+      };
+
+      this._state.profilePage.myPostsData.unshift(newPost);
+
+      //Clear textarea after adding post
+      this._state.profilePage.newPostText = '';
+      this._subscriber();
+
+    } else if (action.type === 'UPDATE-NEW-POST-TEXT') {
+      this._state.profilePage.newPostText = action.newText;
+      this._subscriber();
+
+    } else if (action.type === 'ADD-MESSAGE') {
+      let newId = this._getMessageId();
+
+      let newMessage = {
+        id: newId,
+        text: this._state.dialogsPage.messagesData.newMessageText
+      };
+
+      this._state.dialogsPage.messagesData.myMessagesData.push(newMessage);
+
+      //Clear textarea after adding new message
+      this._state.dialogsPage.messagesData.newMessageText = '';
+      this._subscriber();
+
+    } else if (action.type === 'UPDATE-NEW-MESSAGE-TEXT') {
+      this._state.dialogsPage.messagesData.newMessageText = action.newMsgText;
+
+      //draw updated tree
+      this._subscriber();
+
+    }
+  }
 
 };
 

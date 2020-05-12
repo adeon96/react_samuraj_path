@@ -4,13 +4,7 @@ import styles from './DialogsMessages.module.css';
 import MyMessageItem from './MessageItem/My/MyMessageItem';
 import OtherMessageItem from './MessageItem/Other/OtherMessageItem';
 
-/**
- * 
- * @param {*} props 
- * 
- * props -> messagesData
- * props.state = messagesData
- */
+
 const DialogsMessages = (props) => {
 
   let myMessages =
@@ -25,13 +19,13 @@ const DialogsMessages = (props) => {
   let newMessageRef = React.createRef();
 
   let sendMessage = () => {
-    props.store.addMessage();
+    props.dispatch({ type: 'ADD-MESSAGE' });
   }
 
 
   let onMessageChange = () => {
     let msgText = newMessageRef.current.value;
-    props.store.updateNewMessageText(msgText);
+    props.dispatch({ type: 'UPDATE-NEW-MESSAGE-TEXT', newMsgText: msgText})
   }
 
 
@@ -43,7 +37,7 @@ const DialogsMessages = (props) => {
       <div className={styles.sendForm}>
         <textarea ref={newMessageRef} 
           placeholder='Write something...'
-          value={props.store.getDefaultMessageText()}
+          value={props.dialogsMessages.newMessageText}
           onChange={onMessageChange} />
         <button onClick={sendMessage}>Send</button>
       </div>

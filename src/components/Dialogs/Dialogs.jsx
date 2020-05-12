@@ -3,10 +3,7 @@ import styles from './Dialogs.module.css'
 import DialogsUsers from './DialogsUsers/DialogsUsers';
 import DialogsMessages from './DialogsMessages/DialogsMessages';
 
-/* props -> dialogsPage */
 const Dialogs = (props) => {
-
-  //alert("New msg: " + props.newMessageText);
 
   return (
     <div>
@@ -14,7 +11,8 @@ const Dialogs = (props) => {
 
       <div className={styles.dialogues}>
         <DialogsUsers dialogsUsers={props.dialogsPage.dialogsUsersData} />
-        <DialogsMessages store={props.store} dialogsMessages={props.dialogsPage.messagesData} />
+        <DialogsMessages dialogsMessages={props.dialogsPage.messagesData}
+          dispatch={props.dispatch} />
       </div>
     </div>
   );

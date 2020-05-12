@@ -22,11 +22,11 @@ const App = (props) => {
       <Sidebar />
       <div className='app__wrapper__content'>
         <Route path='/profile' render={() =>
-          <Profile store={props.store} /> }
+          <Profile state={props.state.profilePage} dispatch={props.dispatch} /> }
         />
 
         <Route path='/dialogs' render={() =>
-          <Dialogs store={props.store} dialogsPage={props.store.getState().dialogsPage} />
+          <Dialogs dialogsPage={props.state.dialogsPage} dispatch={props.dispatch} />
         } />
 
         <Route path='/news' component={News} />
