@@ -14,15 +14,12 @@ const MyPosts = (props) => {
       post.text.substring(0, 200) + "... Read more" : post.text} />);
 
 
-
-  let newPostElement = React.createRef();
-
   let addPost = () => {
     props.dispatch(addPostActionCreator());
   }
 
-  let onPostChange = () => {
-    let text = newPostElement.current.value;
+  let onPostChange = (event) => {
+    let text = event.target.value;
     props.dispatch(updateNewPostTextActionCreator(text));
   }
 
@@ -31,8 +28,7 @@ const MyPosts = (props) => {
       <h4>My posts</h4>
 
       <div className={styles.myPosts__form}>
-        <textarea ref={newPostElement}
-          className={styles.form__textarea}
+        <textarea className={styles.form__textarea}
           placeholder="What's new?.."
           onChange={onPostChange}
           value={props.newPostText} />

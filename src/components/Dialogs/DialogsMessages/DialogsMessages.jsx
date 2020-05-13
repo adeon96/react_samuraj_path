@@ -18,15 +18,13 @@ const DialogsMessages = (props) => {
       <OtherMessageItem key={msg.id} text={msg.text} />);
 
 
-  let newMessageRef = React.createRef();
-
   let sendMessage = () => {
     props.dispatch(addMessageActionCreator());
   }
 
 
-  let onMessageChange = () => {
-    let msgText = newMessageRef.current.value;
+  let onMessageChange = (event) => {
+    let msgText = event.target.value;
     props.dispatch(updateNewMessageTextActionCreator(msgText));
   }
 
@@ -37,8 +35,7 @@ const DialogsMessages = (props) => {
       {otherMessages}
 
       <div className={styles.sendForm}>
-        <textarea ref={newMessageRef} 
-          placeholder='Write something...'
+        <textarea placeholder='Write something...'
           value={props.dialogsMessages.newMessageText}
           onChange={onMessageChange} />
         <button onClick={sendMessage}>Send</button>
