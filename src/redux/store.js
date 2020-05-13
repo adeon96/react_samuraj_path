@@ -1,3 +1,8 @@
+const ADD_POST = 'ADD-POST';
+const UPDATE_NEW_POST_TEXT = 'UPDATE-NEW-POST-TEXT';
+const ADD_MESSAGE = 'ADD-MESSAGE';
+const UPDATE_NEW_MESSAGE_TEXT = 'UPDATE-NEW-MESSAGE-TEXT';
+
 let store = {
   _subscriber() {
     console.log("no subscribers / observers");
@@ -157,7 +162,7 @@ let store = {
   },*/
 
   dispatch(action) {
-    if (action.type === 'ADD-POST') {
+    if (action.type === ADD_POST) {
 
       let newId = this._getPostId();
 
@@ -172,11 +177,11 @@ let store = {
       this._state.profilePage.newPostText = '';
       this._subscriber();
 
-    } else if (action.type === 'UPDATE-NEW-POST-TEXT') {
+    } else if (action.type === UPDATE_NEW_POST_TEXT) {
       this._state.profilePage.newPostText = action.newText;
       this._subscriber();
 
-    } else if (action.type === 'ADD-MESSAGE') {
+    } else if (action.type === ADD_MESSAGE) {
       let newId = this._getMessageId();
 
       let newMessage = {
@@ -190,7 +195,7 @@ let store = {
       this._state.dialogsPage.messagesData.newMessageText = '';
       this._subscriber();
 
-    } else if (action.type === 'UPDATE-NEW-MESSAGE-TEXT') {
+    } else if (action.type === UPDATE_NEW_MESSAGE_TEXT) {
       this._state.dialogsPage.messagesData.newMessageText = action.newMsgText;
 
       //draw updated tree
@@ -200,5 +205,13 @@ let store = {
   }
 
 };
+
+export const addPostActionCreator = () => ({type: ADD_POST});
+export const updateNewPostTextActionCreator = (nText) => (
+  { type: UPDATE_NEW_POST_TEXT, newText: nText });
+
+export const addMessageActionCreator = () => ({ type: ADD_MESSAGE });
+export const updateNewMessageTextActionCreator = (msgText) => (
+  { type: UPDATE_NEW_MESSAGE_TEXT, newMsgText: msgText});
 
 export default store;
