@@ -1,7 +1,5 @@
-const ADD_POST = 'ADD-POST';
-const UPDATE_NEW_POST_TEXT = 'UPDATE-NEW-POST-TEXT';
-const ADD_MESSAGE = 'ADD-MESSAGE';
-const UPDATE_NEW_MESSAGE_TEXT = 'UPDATE-NEW-MESSAGE-TEXT';
+import profileReducer from "./profileReducer";
+import dialogsReducer from "./dialogsReducer";
 
 let store = {
   _subscriber() {
@@ -97,121 +95,15 @@ let store = {
     this._subscriber = observer;
   },
 
-  _getPostId() {
-    let postIds = this._state.profilePage.myPostsData.map(post => post.id);
-
-    return Math.max.apply(null, postIds) + 1;
-  },
-
-  _getMessageId() {
-    let messageIds = this._state.dialogsPage.messagesData.myMessagesData.map(msg => msg.id);
-
-    return Math.max.apply(null, messageIds) + 1;
-  },
-
-  /* POSTS LOGIC */
-
-  /*addPost() {
-    let newId = this._getPostId();
-  
-    let newPost = {
-      id: newId,
-      text: this._state.profilePage.newPostText
-    };
-  
-    this._state.profilePage.myPostsData.unshift(newPost);
-  
-    //Clear textarea after adding post
-    this._state.profilePage.newPostText = '';
-  
-    //draw updated tree
-    this._subscriber();
-  },*/
-
-  /*updatePostText(newText) {
-    this._state.profilePage.newPostText = newText;
-
-    //draw updated tree
-    this._subscriber();
-  },*/
-
-  /* MESSAGE LOGIC */
-
-  /*addMessage() {
-    let newId = this._getMessageId();
-
-    let newMessage = {
-      id: newId,
-      text: this._state.dialogsPage.messagesData.newMessageText
-    };
-
-    this._state.dialogsPage.messagesData.myMessagesData.push(newMessage);
-
-    //Clear textarea after adding new message
-    this._state.dialogsPage.messagesData.newMessageText = '';
-
-    //draw updated tree
-    this._subscriber();
-  },*/
-
-  /*updateNewMessageText(newMsgText) {
-    this._state.dialogsPage.messagesData.newMessageText = newMsgText;
-
-    //draw updated tree
-    this._subscriber();
-  },*/
-
   dispatch(action) {
-    if (action.type === ADD_POST) {
+    this._state.profilePage = profileReducer(this._state.profilePage, action);
+    this._state.dialogsPage = dialogsReducer(this._state.dialogsPage, action);
 
-      let newId = this._getPostId();
-
-      let newPost = {
-        id: newId,
-        text: this._state.profilePage.newPostText
-      };
-
-      this._state.profilePage.myPostsData.unshift(newPost);
-
-      //Clear textarea after adding post
-      this._state.profilePage.newPostText = '';
-      this._subscriber();
-
-    } else if (action.type === UPDATE_NEW_POST_TEXT) {
-      this._state.profilePage.newPostText = action.newText;
-      this._subscriber();
-
-    } else if (action.type === ADD_MESSAGE) {
-      let newId = this._getMessageId();
-
-      let newMessage = {
-        id: newId,
-        text: this._state.dialogsPage.messagesData.newMessageText
-      };
-
-      this._state.dialogsPage.messagesData.myMessagesData.push(newMessage);
-
-      //Clear textarea after adding new message
-      this._state.dialogsPage.messagesData.newMessageText = '';
-      this._subscriber();
-
-    } else if (action.type === UPDATE_NEW_MESSAGE_TEXT) {
-      this._state.dialogsPage.messagesData.newMessageText = action.newMsgText;
-
-      //draw updated tree
-      this._subscriber();
-
-    }
+    this._subscriber();
   }
 
 };
 
-export const addPostActionCreator = () => ({type: ADD_POST});
-export const updateNewPostTextActionCreator = (nText) => (
-  { type: UPDATE_NEW_POST_TEXT, newText: nText });
-
-export const addMessageActionCreator = () => ({ type: ADD_MESSAGE });
-export const updateNewMessageTextActionCreator = (msgText) => (
-  { type: UPDATE_NEW_MESSAGE_TEXT, newMsgText: msgText});
+window.state = store.getState();
 
 export default store;
