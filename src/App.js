@@ -13,7 +13,6 @@ import { Route } from 'react-router-dom';
 
 
 const App = (props) => {
-  window.props = props;
 
   return (
 
@@ -22,11 +21,11 @@ const App = (props) => {
       <Sidebar />
       <div className='app__wrapper__content'>
         <Route path='/profile' render={() =>
-          <Profile state={props.state.profilePage} dispatch={props.dispatch} /> }
+          <Profile store={props.store} /> }
         />
 
         <Route path='/dialogs' render={() =>
-          <Dialogs dialogsPage={props.state.dialogsPage} dispatch={props.dispatch} />
+          <Dialogs store={props.store} />
         } />
 
         <Route path='/news' component={News} />

@@ -12,7 +12,7 @@ const initialState = {
     {
       id: 3,
       name: "Vika",
-      image: 'https://photographyreel.com/file/images/12-2015/1-iran-beautiful-woman-photography.jpg'
+      image: 'https://static01.nyt.com/images/2019/11/17/books/review/17Salam/Salam1-superJumbo.jpg'
     },
     {
       id: 4,

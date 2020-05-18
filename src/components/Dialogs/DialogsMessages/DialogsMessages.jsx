@@ -3,29 +3,27 @@ import styles from './DialogsMessages.module.css';
 
 import MyMessageItem from './MessageItem/My/MyMessageItem';
 import OtherMessageItem from './MessageItem/Other/OtherMessageItem';
-import { addMessageActionCreator, updateNewMessageTextActionCreator }
-from '../../../redux/dialogsReducer';
 
 
 const DialogsMessages = (props) => {
 
   let myMessages =
-    props.dialogsMessages.myMessagesData.map(msg =>
+    props.state.myMessagesData.map(msg =>
       <MyMessageItem key={msg.id} text={msg.text} />);
 
   let otherMessages =
-    props.dialogsMessages.otherMessagesData.map(msg =>
+    props.state.otherMessagesData.map(msg =>
       <OtherMessageItem key={msg.id} text={msg.text} />);
 
 
-  let sendMessage = () => {
-    props.dispatch(addMessageActionCreator());
+  let onMessageSend = () => {
+    props.sendMessage();
   }
 
 
   let onMessageChange = (event) => {
     let msgText = event.target.value;
-    props.dispatch(updateNewMessageTextActionCreator(msgText));
+    props.updateNewMessageText(msgText);
   }
 
 
@@ -36,9 +34,9 @@ const DialogsMessages = (props) => {
 
       <div className={styles.sendForm}>
         <textarea placeholder='Write something...'
-          value={props.dialogsMessages.newMessageText}
+          value={props.newMessageText}
           onChange={onMessageChange} />
-        <button onClick={sendMessage}>Send</button>
+        <button onClick={onMessageSend}>Send</button>
       </div>
     </div>
   );

@@ -1,7 +1,7 @@
 import React from 'react';
 import styles from './Dialogs.module.css'
-import DialogsUsers from './DialogsUsers/DialogsUsers';
-import DialogsMessages from './DialogsMessages/DialogsMessages';
+import DialogsUsersContainer from './DialogsUsers/DialogsUsersContainer';
+import DialogsMessagesContainer from './DialogsMessages/DialogsMessagesContainer';
 
 const Dialogs = (props) => {
 
@@ -10,9 +10,8 @@ const Dialogs = (props) => {
       <h3 className={styles.header}>Dialogs</h3>
 
       <div className={styles.dialogues}>
-        <DialogsUsers dialogsUsers={props.dialogsPage.dialogsUsersData} />
-        <DialogsMessages dialogsMessages={props.dialogsPage.messagesData}
-          dispatch={props.dispatch} />
+        <DialogsUsersContainer store={props.store} />
+        <DialogsMessagesContainer store={props.store} />
       </div>
     </div>
   );
