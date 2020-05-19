@@ -1,12 +1,19 @@
 import React from 'react';
 
 import About from './About';
+import StoreContext from '../../../redux/StoreContext';
 
-const AboutContainer = (props) => {
-  let state = props.store.getState();
+const AboutContainer = () => {
 
-  return(
-    <About state={state.profilePage.aboutData} />
+  return (
+
+    <StoreContext.Consumer>
+      {(store) => {
+        return <About state={store.getState().profilePage.aboutData} />;
+      }}
+    </StoreContext.Consumer>
+
+
   );
 };
 

@@ -1,12 +1,18 @@
 import React from 'react';
 
 import DialogsUsers from './DialogsUsers';
+import StoreContext from '../../../redux/StoreContext';
 
-const DialogsUsersContainer = (props) => {
-  let state = props.store.getState();
+const DialogsUsersContainer = () => {
 
   return(
-    <DialogsUsers state={state.dialogsPage.dialogsUsersData} />
+
+    <StoreContext.Consumer>
+      {(store) => {
+        return <DialogsUsers state={store.getState().dialogsPage.dialogsUsersData} />;
+      }}
+    </StoreContext.Consumer>
+    
   );
 };
 

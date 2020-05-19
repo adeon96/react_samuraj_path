@@ -12,7 +12,7 @@ import Settings from './components/Settings/Settings';
 import { Route } from 'react-router-dom';
 
 
-const App = (props) => {
+const App = () => {
 
   return (
 
@@ -21,11 +21,11 @@ const App = (props) => {
       <Sidebar />
       <div className='app__wrapper__content'>
         <Route path='/profile' render={() =>
-          <Profile store={props.store} /> }
+          <Profile /> }
         />
 
         <Route path='/dialogs' render={() =>
-          <Dialogs store={props.store} />
+          <Dialogs />
         } />
 
         <Route path='/news' component={News} />
