@@ -1,20 +1,18 @@
-import React from 'react';
+//import React from 'react';
 
 import About from './About';
-import StoreContext from '../../../redux/StoreContext';
 
-const AboutContainer = () => {
-
-  return (
-
-    <StoreContext.Consumer>
-      {(store) => {
-        return <About state={store.getState().profilePage.aboutData} />;
-      }}
-    </StoreContext.Consumer>
+import { connect } from 'react-redux';
 
 
-  );
+let mapStateToProps = (state) => {
+
+  return {
+    state: state.profilePage.aboutData
+  }
+
 };
+
+const AboutContainer = connect(mapStateToProps)(About);
 
 export default AboutContainer;

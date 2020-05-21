@@ -42,7 +42,7 @@ const initialState = {
 const profileReducer = (state = initialState, action) => {
 
   switch (action.type) {
-    case ADD_POST:
+    case ADD_POST: {
       let postIds = state.myPostsData.map(post => post.id);
       let newId = Math.max.apply(null, postIds) + 1;;
 
@@ -51,14 +51,20 @@ const profileReducer = (state = initialState, action) => {
         text: state.newPostText
       };
 
-      state.myPostsData.unshift(newPost);
-      state.newPostText = '';
+      let stateCopy = { ...state };
+      stateCopy.myPostsData = [...state.myPostsData];
+      stateCopy.myPostsData.unshift(newPost);
+      stateCopy.newPostText = '';
 
-      return state;
+      return stateCopy;
+    }
 
-    case UPDATE_NEW_POST_TEXT:
-      state.newPostText = action.newText;
-      return state;
+    case UPDATE_NEW_POST_TEXT: {
+      let stateCopy = { ...state };
+
+      stateCopy.newPostText = action.newText;
+      return stateCopy;
+    }
 
     default:
       return state;
@@ -67,6 +73,6 @@ const profileReducer = (state = initialState, action) => {
 
 export default profileReducer;
 
-export const addPostActionCreator = () => ({type: ADD_POST});
+export const addPostActionCreator = () => ({ type: ADD_POST });
 export const updateNewPostTextActionCreator = (nText) => (
   { type: UPDATE_NEW_POST_TEXT, newText: nText });
