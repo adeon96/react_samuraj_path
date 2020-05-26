@@ -1,0 +1,63 @@
+h3, p {
+  margin: 0;
+  padding: 0;
+}
+
+.userItem {
+  display: flex;
+  margin: 20px 0px;
+}
+
+.userItem__left {
+  flex-basis: 200px;
+  flex-grow: 0;
+  flex-shrink: 1;
+
+  margin-right: 10px;
+}
+
+.userPhoto {
+  flex: 0 1 20%;
+  max-height: 100px;
+  overflow: hidden;
+  border-radius: 20px;
+  margin-bottom: 10px;
+}
+
+.userPhoto img {
+  max-width: 100%;
+  display: block;
+}
+
+.userButton {
+  width: 100%;
+  border-radius: 10px;
+  background-color: limegreen;
+  color: aqua;
+  border: none;
+}
+
+.userButton:active {
+  background-color: blue;
+}
+
+.userButton:focus {
+  outline: none;
+}
+
+.userItem__right {
+  display: flex;
+  flex-direction: column;
+
+  width: 100%;
+  padding: 10px 20px;
+  margin-left: 10px;
+  border: 1px solid gray;
+  border-radius: 10px;
+}
+
+.right_top {
+  display: flex;
+  flex-grow: 1;
+  justify-content: space-between;
+}
