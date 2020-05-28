@@ -27,7 +27,7 @@ const UserItem = (props) => {
         <div className={styles.right_top}>
           <h3 className={styles.userName}>{props.name}</h3>
           <p className={styles.right__userLocation}>
-            {props.location.city}, {props.location.country}</p>
+            {"props.location.city"}, {"props.location.country"}</p>
         </div>
 
         <div className={styles.right_bottom}>

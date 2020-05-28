@@ -41,13 +41,15 @@ const initialState = {
 };
 
 const usersReducer = (state = initialState, action) => {
+  //debugger;
+
   switch (action.type) {
     case TOGGLE_USER_FOLLOW:
       return {
         ...state,
         users: state.users.map(user => {
           if(user.id === action.userId) {
-            return {...user, isFollowed: !user.isFollowed};
+            return {...user, followed: !user.followed};
           }
 
           return user;          
@@ -55,10 +57,13 @@ const usersReducer = (state = initialState, action) => {
       }
 
     case SET_USERS:
+      //return [action.payload.data, ...state];
       return {
         ...state,
         users: [...state.users, ...action.users]
       }
+
+      //return Object.assign({}, state, state.users, action.users);
     
     default:
       return state;

@@ -8,9 +8,12 @@ const MyPosts = (props) => {
 
   /* Converting array from objects to components */
   let myPosts = props.state.map(post => <Post key={post.id}
+    id={post.id}
     image={post.image}
     text={post.text.length > 200 ?
-      post.text.substring(0, 200) + "... Read more" : post.text} />);
+      post.text.substring(0, 200) + "... Read more" : post.text}
+    current_likes={post.likes}
+    likePost={props.likePost} />);
 
 
   let onAddPost = () => {

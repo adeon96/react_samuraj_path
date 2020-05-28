@@ -14,6 +14,10 @@ const Sidebar = () => {
           Messages
         </NavLink>
 
+        <NavLink className={styles.sidebar__item} to="/users" activeClassName={styles.sidebar__item_active}>
+          Users
+        </NavLink>
+
         <NavLink className={styles.sidebar__item} to="/news" activeClassName={styles.sidebar__item_active}>
           News
         </NavLink>

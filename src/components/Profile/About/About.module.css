@@ -26,9 +26,11 @@
 .info__keys p {
   font-weight: 600;
   color: #333;
+  margin: 10px 0px;
 }
 
 .info__values p {
   font-weight: 600;
   color: #0062cc;
+  margin: 10px 0px;
 }
