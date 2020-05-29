@@ -1,47 +1,16 @@
 const TOGGLE_USER_FOLLOW = 'TOGGLE-USER-FOLLOW';
 const SET_USERS = 'SET-USERS';
+const SET_CURRENT_PAGE = 'SET-CURRENT-PAGE';
+const SET_TOTAL_USERS_COUNT = 'SET-TOTAL-USERS-COUNT';
 
 const initialState = {
-  users: [
-    /*{
-      id: 1,
-      name: 'Roma',
-      photoURL: 'https://cdn.pixabay.com/photo/2019/05/24/10/59/business-man-4226005_960_720.jpg',
-      location: {
-        city: 'Kyiv',
-        country: 'Ukraine'
-      },
-      status: 'I am a little samurai...',
-      isFollowed: true
-    },
-
-    {
-      id: 2,
-      name: 'Vika',
-      photoURL: 'https://i.pinimg.com/originals/97/ed/6b/97ed6b370803649addbf66144c18c194.png',
-      location: {
-        city: 'Warsaw',
-        country: 'Poland'
-      },
-      status: 'Looking for something special...',
-      isFollowed: true
-    },
-
-    {
-      id: 3,
-      name: 'Dima',
-      location: {
-        city: 'Minsk',
-        country: 'Belarus'
-      },
-      status: 'I am a Barca fan...',
-      isFollowed: false
-    }*/
-  ]
+  users: [],
+  currentPage: 1,
+  totalUsersNumber: 0,
+  usersPerPage: 10
 };
 
 const usersReducer = (state = initialState, action) => {
-  //debugger;
 
   switch (action.type) {
     case TOGGLE_USER_FOLLOW:
@@ -57,13 +26,22 @@ const usersReducer = (state = initialState, action) => {
       }
 
     case SET_USERS:
-      //return [action.payload.data, ...state];
       return {
         ...state,
-        users: [...state.users, ...action.users]
+        users: [...action.users]
       }
 
-      //return Object.assign({}, state, state.users, action.users);
+    case SET_CURRENT_PAGE:
+      return {
+        ...state,
+        currentPage: action.pageNum
+      }
+
+      case SET_TOTAL_USERS_COUNT:
+        return {
+          ...state,
+          totalUsersNumber: action.totUsrNum
+        }
     
     default:
       return state;
@@ -71,10 +49,22 @@ const usersReducer = (state = initialState, action) => {
 };
 
 export default usersReducer;
-export const toggleUserFollowAC = (uId) => 
-  ({type: TOGGLE_USER_FOLLOW, userId: uId});
+
+export const toggleUserFollowAC = (uId) => ({
+  type: TOGGLE_USER_FOLLOW, userId: uId
+});
 
 export const setUsersAC = (usersData) => ({
   type: SET_USERS,
   users: usersData
+});
+
+export const setCurrentPageAC = (newPage) => ({
+  type: SET_CURRENT_PAGE,
+  pageNum: newPage
+});
+
+export const setTotalUsersCountAC = (totQuantity) => ({
+  type: SET_TOTAL_USERS_COUNT,
+  totUsrNum: totQuantity
 });

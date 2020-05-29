@@ -18,7 +18,7 @@ h3, p {
 
 .userPhoto {
   flex: 0 1 20%;
-  max-height: 100px;
+  max-height: 300px;
   overflow: hidden;
   border-radius: 20px;
   margin-bottom: 10px;
