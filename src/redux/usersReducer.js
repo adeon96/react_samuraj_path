@@ -1,4 +1,6 @@
 const TOGGLE_USER_FOLLOW = 'TOGGLE-USER-FOLLOW';
+const TOGGLE_USERS_FETCHING = 'TOGGLE-USERS-FETCHING';
+
 const SET_USERS = 'SET-USERS';
 const SET_CURRENT_PAGE = 'SET-CURRENT-PAGE';
 const SET_TOTAL_USERS_COUNT = 'SET-TOTAL-USERS-COUNT';
@@ -7,7 +9,8 @@ const initialState = {
   users: [],
   currentPage: 1,
   totalUsersNumber: 0,
-  usersPerPage: 10
+  usersPerPage: 10,
+  isFetching: false
 };
 
 const usersReducer = (state = initialState, action) => {
@@ -17,12 +20,12 @@ const usersReducer = (state = initialState, action) => {
       return {
         ...state,
         users: state.users.map(user => {
-          if(user.id === action.userId) {
-            return {...user, followed: !user.followed};
+          if (user.id === action.userId) {
+            return { ...user, followed: !user.followed };
           }
 
-          return user;          
-        }) 
+          return user;
+        })
       }
 
     case SET_USERS:
@@ -37,12 +40,18 @@ const usersReducer = (state = initialState, action) => {
         currentPage: action.pageNum
       }
 
-      case SET_TOTAL_USERS_COUNT:
-        return {
-          ...state,
-          totalUsersNumber: action.totUsrNum
-        }
-    
+    case SET_TOTAL_USERS_COUNT:
+      return {
+        ...state,
+        totalUsersNumber: action.totUsrNum
+      }
+
+    case TOGGLE_USERS_FETCHING:
+      return {
+        ...state,
+        isFetching: action.fetchingFlag
+      }
+
     default:
       return state;
   }
@@ -67,4 +76,9 @@ export const setCurrentPageAC = (newPage) => ({
 export const setTotalUsersCountAC = (totQuantity) => ({
   type: SET_TOTAL_USERS_COUNT,
   totUsrNum: totQuantity
+});
+
+export const setToggleUsersFetchingAC = (fetFlag) => ({
+  type: TOGGLE_USERS_FETCHING,
+  fetchingFlag: fetFlag
 });

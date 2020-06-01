@@ -3,6 +3,7 @@ import styles from './Users.module.css';
 
 import UserItem from './UserItem/UserItem';
 import defaultImg from '../../assets/img/user_placeholder.jpg';
+import Preloader from '../commom/Preloader';
 
 import * as axios from 'axios';
 
@@ -13,21 +14,25 @@ class UsersClass extends React.Component {
 
   //inserting data to state
   _getUsers = (pageNum, usersPerPage) => {
+    this.props.setUsersFetching(true);
     axios.get(
-      `https://social-network.samuraijs.com/api/1.0/users?` + 
+      `https://social-network.samuraijs.com/api/1.0/users?` +
       `page=${pageNum}&count=${usersPerPage}`)
       .then(response => {
         this.props.setUsers(response.data.items);
+        this.props.setUsersFetching(false);
       });
   }
 
   componentDidMount() {
+    this.props.setUsersFetching(true);
     axios.get(
-      `https://social-network.samuraijs.com/api/1.0/users?` + 
+      `https://social-network.samuraijs.com/api/1.0/users?` +
       `page=${this.props.currentPage}&count=${this.props.usersPerPage}`)
       .then(response => {
         this.props.setUsers(response.data.items);
         this.props.setTotalUsersNumber(response.data.totalCount);
+        this.props.setUsersFetching(false);
       });
   }
 
@@ -50,11 +55,11 @@ class UsersClass extends React.Component {
       toggleUserFollow={this.props.toggleUserFollow} />);
 
 
-    let pagesNumber = 
+    let pagesNumber =
       Math.ceil(this.props.totalUsersNumber / this.props.usersPerPage);
 
     let pages = [];
-    for(let i = 1; i <= pagesNumber; i++) {
+    for (let i = 1; i <= pagesNumber; i++) {
       pages.push(i);
     }
 
@@ -74,6 +79,8 @@ class UsersClass extends React.Component {
         <select value={this.props.currentPage} onChange={this.onPageChange}>
           {pagesHTML}
         </select>
+
+        {this.props.isFetching ? <Preloader /> : ''}
 
         <div className={styles.users}>
           {this._usersData}
