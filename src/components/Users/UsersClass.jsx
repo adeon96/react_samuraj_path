@@ -67,7 +67,8 @@ class UsersClass extends React.Component {
     //<option>1</option>
     //<option>2</option>
     //...
-    let pagesHTML = pages.map(page => <option key={page}>{page}</option>);
+    let pagesHTML = pages.map(page => 
+      <option key={page.toString()} value={page}>{page}</option>);
 
 
     return (

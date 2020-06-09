@@ -1,5 +1,6 @@
 import React from 'react'
 import styles from './UserItem.module.css'
+import { NavLink } from 'react-router-dom';
 
 
 const UserItem = (props) => {
@@ -14,8 +15,11 @@ const UserItem = (props) => {
 
       <div className={styles.userItem__left}>
         <div className={styles.userPhoto}>
-          <img src={props.photoURL} alt='ava' />
+          <NavLink to={'/profile/' + props.id}>
+            <img src={props.photoURL} alt='ava' />
+          </NavLink>
         </div>
+        
 
         <button className={styles.userButton} onClick={onFollowClick}>
           {props.isFollowed ? 'Unfollow' : 'Follow'}
