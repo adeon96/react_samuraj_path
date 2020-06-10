@@ -22,7 +22,7 @@ const App = () => {
       <Header />
       <Sidebar />
       <div className='app__wrapper__content'>
-        <Route path='/profile' render={() =>
+        <Route path='/profile/:userId?' render={() =>
           <Profile />}
         />
 

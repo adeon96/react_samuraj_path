@@ -4,14 +4,20 @@ import {setProfileDataAC, setProfileDataFetchingAC} from '../../../redux/aboutRe
 import { connect } from 'react-redux';
 import * as axios from 'axios';
 import About from './About';
+import { withRouter } from 'react-router-dom';
 
 
 class AboutContainer extends React.Component {
 
   componentDidMount() {
 
+    let userId = this.props.match.params.userId;
+    if(!userId) {
+      userId = 2;
+    }
+
     this.props.setProfileDataFetching(true);
-    axios.get('https://social-network.samuraijs.com/api/1.0/profile/10')
+    axios.get('https://social-network.samuraijs.com/api/1.0/profile/' + userId)
     .then(response => {
       this.props.setProfileData(response.data);
       this.props.setProfileDataFetching(false);
@@ -50,4 +56,6 @@ let mapDispatchToProps = (dispatch) => {
 
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(AboutContainer);
+let aboutContainerWithUrlParam = withRouter(AboutContainer);
+
+export default connect(mapStateToProps, mapDispatchToProps)(aboutContainerWithUrlParam);
