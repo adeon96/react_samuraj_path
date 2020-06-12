@@ -17,7 +17,8 @@ class UsersClass extends React.Component {
     this.props.setUsersFetching(true);
     axios.get(
       `https://social-network.samuraijs.com/api/1.0/users?` +
-      `page=${pageNum}&count=${usersPerPage}`)
+      `page=${pageNum}&count=${usersPerPage}`,
+      {withCredentials: true})
       .then(response => {
         this.props.setUsers(response.data.items);
         this.props.setUsersFetching(false);
@@ -28,7 +29,8 @@ class UsersClass extends React.Component {
     this.props.setUsersFetching(true);
     axios.get(
       `https://social-network.samuraijs.com/api/1.0/users?` +
-      `page=${this.props.currentPage}&count=${this.props.usersPerPage}`)
+      `page=${this.props.currentPage}&count=${this.props.usersPerPage}`,
+      {withCredentials: true})
       .then(response => {
         this.props.setUsers(response.data.items);
         this.props.setTotalUsersNumber(response.data.totalCount);

@@ -6,6 +6,7 @@ import {
   from "../../redux/usersReducer";
 
 import UsersClass from './UsersClass';
+import * as axios from 'axios';
 
 let mapStateToProps = (state) => {
 
@@ -22,7 +23,49 @@ let mapDispatchToProps = (dispatch) => {
 
   return {
     toggleUserFollow: (userId) => {
-      dispatch(toggleUserFollowAC(userId));
+
+      //Server query
+
+      //If we already follow this user?
+      axios.get('https://social-network.samuraijs.com/api/1.0/follow/' + userId,
+        { withCredentials: true })
+        .then(response => {
+          if (response.data === true) {
+
+            //Unollow user
+            axios.delete('https://social-network.samuraijs.com/api/1.0/follow/' + userId,
+              {
+                withCredentials: true,
+                headers: {
+                  'API-KEY': 'e1de558d-3eb2-467c-959e-2ffee0df160a'
+                }
+              })
+              .then(response => {
+                if (response.data.resultCode === 0) {
+                  dispatch(toggleUserFollowAC(userId));
+                }
+              });
+
+          } else {
+
+            //Follow user
+            axios.post('https://social-network.samuraijs.com/api/1.0/follow/' + userId, {},
+              {
+                withCredentials: true,
+                headers: {
+                  'API-KEY': 'e1de558d-3eb2-467c-959e-2ffee0df160a'
+                }
+              })
+              .then(response => {
+                if (response.data.resultCode === 0) {
+                  dispatch(toggleUserFollowAC(userId));
+                }
+              });
+          }
+
+        });
+
+      //dispatch(toggleUserFollowAC(userId));
     },
 
     setUsers: (users) => {
