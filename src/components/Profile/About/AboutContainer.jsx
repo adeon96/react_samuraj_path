@@ -1,27 +1,48 @@
 import React from 'react';
-import {setProfileDataAC, setProfileDataFetchingAC} from '../../../redux/aboutReducer';
+import { setProfileDataAC, setProfileDataFetchingAC } from '../../../redux/aboutReducer';
 
 import { connect } from 'react-redux';
-import * as axios from 'axios';
 import About from './About';
 import { withRouter } from 'react-router-dom';
+import usersAPI from '../../../api/usersAPI';
 
 
 class AboutContainer extends React.Component {
 
+  api = new usersAPI();
+
   componentDidMount() {
 
     let userId = this.props.match.params.userId;
-    if(!userId) {
-      userId = 2;
+    if (!userId) {
+
+      this.props.setProfileDataFetching(true);
+
+      //find out my id and setting my profile
+      this.api.authorizeUser()
+        .then(response => {
+          if (response.resultCode === 0) {
+            userId = response.data.id;
+
+            this.api.getUserProfile(userId)
+              .then(data => {
+                this.props.setProfileData(data);
+              })
+          }
+
+          this.props.setProfileDataFetching(false);
+        })
+
+      return;
     }
 
     this.props.setProfileDataFetching(true);
-    axios.get('https://social-network.samuraijs.com/api/1.0/profile/' + userId)
-    .then(response => {
-      this.props.setProfileData(response.data);
-      this.props.setProfileDataFetching(false);
-    });
+
+    this.api.getUserProfile(userId)
+      .then(data => {
+        this.props.setProfileData(data);
+        this.props.setProfileDataFetching(false);
+      })
   }
 
   render() {

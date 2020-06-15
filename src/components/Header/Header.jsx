@@ -4,6 +4,8 @@ import Preloader from './../commom/Preloader';
 import { NavLink } from 'react-router-dom';
 
 const Header = (props) => {
+  //window.headerProps = props;
+
   return (<div className={styles.header}>
 
     {props.isFetching ? <Preloader /> : ''}

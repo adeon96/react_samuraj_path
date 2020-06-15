@@ -5,42 +5,35 @@ import UserItem from './UserItem/UserItem';
 import defaultImg from '../../assets/img/user_placeholder.jpg';
 import Preloader from '../commom/Preloader';
 
-import * as axios from 'axios';
+import usersAPI from '../../api/usersAPI';
 
 class UsersClass extends React.Component {
 
   //mapped data with state to jsx
   _usersData = null;
 
-  //inserting data to state
-  _getUsers = (pageNum, usersPerPage) => {
-    this.props.setUsersFetching(true);
-    axios.get(
-      `https://social-network.samuraijs.com/api/1.0/users?` +
-      `page=${pageNum}&count=${usersPerPage}`,
-      {withCredentials: true})
-      .then(response => {
-        this.props.setUsers(response.data.items);
-        this.props.setUsersFetching(false);
-      });
-  }
+  //object containing methods for work with users
+  api = new usersAPI();
 
   componentDidMount() {
     this.props.setUsersFetching(true);
-    axios.get(
-      `https://social-network.samuraijs.com/api/1.0/users?` +
-      `page=${this.props.currentPage}&count=${this.props.usersPerPage}`,
-      {withCredentials: true})
-      .then(response => {
-        this.props.setUsers(response.data.items);
-        this.props.setTotalUsersNumber(response.data.totalCount);
-        this.props.setUsersFetching(false);
-      });
+      this.api.getUsers(this.props.currentPage, this.props.usersPerPage)
+        .then(data => {
+          this.props.setUsers(data.items);
+          this.props.setTotalUsersNumber(data.totalCount);
+          this.props.setUsersFetching(false);
+        });
   }
 
   onPageChange = (e) => {
     this.props.setCurrentPage(e.target.value);
-    this._getUsers(e.target.value, this.props.usersPerPage);
+
+    this.props.setUsersFetching(true);
+    this.api.getUsers(e.target.value, this.props.usersPerPage)
+      .then(usersOnPage => {
+        this.props.setUsers(usersOnPage.items);
+        this.props.setUsersFetching(false);
+      });
   }
 
   render() {
