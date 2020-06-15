@@ -37,6 +37,10 @@ h3, p {
   border: none;
 }
 
+.userButton:disabled {
+  background-color: gray;
+}
+
 .userButton:active {
   background-color: blue;
 }

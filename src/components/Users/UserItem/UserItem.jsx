@@ -21,7 +21,7 @@ const UserItem = (props) => {
         </div>
         
 
-        <button className={styles.userButton} onClick={onFollowClick}>
+        <button disabled={props.isButtonDisabled} className={styles.userButton} onClick={onFollowClick}>
           {props.isFollowed ? 'Unfollow' : 'Follow'}
         </button>
       </div>

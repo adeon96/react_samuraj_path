@@ -47,6 +47,7 @@ class UsersClass extends React.Component {
       location={user.location}
       status={user.status}
       isFollowed={user.followed}
+      isButtonDisabled={user.disabled}
       toggleUserFollow={this.props.toggleUserFollow} />);
 
 

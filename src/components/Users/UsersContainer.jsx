@@ -1,7 +1,8 @@
 import { connect } from "react-redux";
 import {
   toggleUserFollowAC, setUsersAC, setCurrentPageAC, setTotalUsersCountAC,
-  setToggleUsersFetchingAC
+  setToggleUsersFetchingAC,
+  toggleUserDisableAC
 }
   from "../../redux/usersReducer";
 
@@ -24,27 +25,47 @@ let mapStateToProps = (state) => {
 let mapDispatchToProps = (dispatch) => {
 
   return {
+
+    /*toggleUserDisabled: (userId) => {
+      dispatch(toggleUserDisableAC(userId));
+    },*/
+
     toggleUserFollow: (userId) => {
 
       api.isUserFollowed(userId)
         .then(response => {
           //if we followed this user
           if (response === true) {
+
+            //disable button
+            dispatch(toggleUserDisableAC(userId));
+
             api.unfollowUser(userId)
               .then(data => {
                 if (data.resultCode === 0) {
                   dispatch(toggleUserFollowAC(userId));
                 }
+
+                //enable button
+                dispatch(toggleUserDisableAC(userId));
               })
           } else {
+
+            //disable button
+            dispatch(toggleUserDisableAC(userId));
+
             api.followUser(userId)
               .then(data => {
                 if (data.resultCode === 0) {
                   dispatch(toggleUserFollowAC(userId));
                 }
+
+                //enable button
+                dispatch(toggleUserDisableAC(userId));
               })
           }
         })
+
     },
 
     setUsers: (users) => {

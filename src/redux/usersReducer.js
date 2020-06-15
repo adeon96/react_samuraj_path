@@ -1,4 +1,5 @@
 const TOGGLE_USER_FOLLOW = 'TOGGLE-USER-FOLLOW';
+const TOGGLE_USER_DISABLE = 'TOGGLE-USER-DISABLE';
 const TOGGLE_USERS_FETCHING = 'TOGGLE-USERS-FETCHING';
 
 const SET_USERS = 'SET-USERS';
@@ -16,6 +17,18 @@ const initialState = {
 const usersReducer = (state = initialState, action) => {
 
   switch (action.type) {
+    case TOGGLE_USER_DISABLE:
+      return {
+        ...state,
+        users: state.users.map(user => {
+          if (user.id === action.userId) {
+            return { ...user, disabled: !user.disabled };
+          }
+
+          return user;
+        })
+      }
+
     case TOGGLE_USER_FOLLOW:
       return {
         ...state,
@@ -58,6 +71,10 @@ const usersReducer = (state = initialState, action) => {
 };
 
 export default usersReducer;
+
+export const toggleUserDisableAC = (uId) => ({
+  type: TOGGLE_USER_DISABLE, userId: uId
+});
 
 export const toggleUserFollowAC = (uId) => ({
   type: TOGGLE_USER_FOLLOW, userId: uId
