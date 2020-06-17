@@ -1,5 +1,9 @@
+import usersAPI from "../api/usersAPI";
+
 const SET_PROFILE_DATA = 'SET-PROFILE-DATA';
 const SET_PROFILE_DATA_FETCHING = 'SET-PROFILE-DATA-FETCHING';
+
+const api = new usersAPI();
 
 const initialState = {
   aboutData: {
@@ -34,7 +38,7 @@ const aboutReducer = (state = initialState, action) => {
     case SET_PROFILE_DATA:
       return {
         ...state,
-        aboutData: {...action.profileData}
+        aboutData: { ...action.profileData }
       }
 
     case SET_PROFILE_DATA_FETCHING:
@@ -61,3 +65,14 @@ export const setProfileDataFetchingAC = (fetchFlag) => ({
   type: SET_PROFILE_DATA_FETCHING,
   fetchingFlag: fetchFlag
 });
+
+//Thunk
+export const getUserProfile = (userId) => (dispatch) => {
+  dispatch(setProfileDataFetchingAC(true));
+
+  api.getUserProfile(userId)
+    .then(response => {
+      dispatch(setProfileDataAC(response.data));
+      dispatch(setProfileDataFetchingAC(false));
+    })
+}

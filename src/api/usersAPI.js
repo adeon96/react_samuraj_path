@@ -24,9 +24,6 @@ class usersAPI {
 
     return (
       this._instance.get('profile/' + userId)
-        .then(response => {
-          return response.data;
-        })
     )
 
   }
@@ -35,40 +32,18 @@ class usersAPI {
 
     return (
       this._instance.get('auth/me')
-        .then(response => {
-          return response.data;
-        })
     )
   }
 
   followUser = (userId) => {
     return (
       this._instance.post('follow/' + userId)
-      .then(response => {
-        return response.data;
-      })
     )
   }
 
   unfollowUser = (userId) => {
     return (
       this._instance.delete('follow/' + userId)
-      .then(response => {
-        return response.data;
-      })
-    )
-  }
-
-  isUserFollowed = (userId) => {
-    return (
-      this._instance.get('follow/' + userId)
-      .then(response => {
-        if(response.data === true) {
-          return true;
-        }
-        
-        return false;
-      })
     )
   }
 

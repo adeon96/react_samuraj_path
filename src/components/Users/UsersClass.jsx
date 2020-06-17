@@ -16,24 +16,14 @@ class UsersClass extends React.Component {
   api = new usersAPI();
 
   componentDidMount() {
-    this.props.setUsersFetching(true);
-      this.api.getUsers(this.props.currentPage, this.props.usersPerPage)
-        .then(data => {
-          this.props.setUsers(data.items);
-          this.props.setTotalUsersNumber(data.totalCount);
-          this.props.setUsersFetching(false);
-        });
+    this.props.getUsers(this.props.currentPage, this.props.usersPerPage);
   }
 
   onPageChange = (e) => {
-    this.props.setCurrentPage(e.target.value);
+    let currentPage = e.target.value;
+    this.props.setCurrentPage(currentPage);
 
-    this.props.setUsersFetching(true);
-    this.api.getUsers(e.target.value, this.props.usersPerPage)
-      .then(usersOnPage => {
-        this.props.setUsers(usersOnPage.items);
-        this.props.setUsersFetching(false);
-      });
+    this.props.getUsers(currentPage, this.props.usersPerPage);
   }
 
   render() {
@@ -48,7 +38,8 @@ class UsersClass extends React.Component {
       status={user.status}
       isFollowed={user.followed}
       isButtonDisabled={user.disabled}
-      toggleUserFollow={this.props.toggleUserFollow} />);
+      followUser={this.props.followUser}
+      unfollowUser={this.props.unfollowUser} />);
 
 
     let pagesNumber =
@@ -63,7 +54,7 @@ class UsersClass extends React.Component {
     //<option>1</option>
     //<option>2</option>
     //...
-    let pagesHTML = pages.map(page => 
+    let pagesHTML = pages.map(page =>
       <option key={page.toString()} value={page}>{page}</option>);
 
 

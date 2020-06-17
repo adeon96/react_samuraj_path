@@ -6,8 +6,11 @@ import { NavLink } from 'react-router-dom';
 const UserItem = (props) => {
 
   let onFollowClick = () => {
-    let userId = props.id;
-    props.toggleUserFollow(userId);
+    props.followUser(props.id);
+  }
+
+  let onUnfollowClick = () => {
+    props.unfollowUser(props.id);
   }
 
   return (
@@ -19,11 +22,10 @@ const UserItem = (props) => {
             <img src={props.photoURL} alt='ava' />
           </NavLink>
         </div>
-        
 
-        <button disabled={props.isButtonDisabled} className={styles.userButton} onClick={onFollowClick}>
-          {props.isFollowed ? 'Unfollow' : 'Follow'}
-        </button>
+        {props.isFollowed ?
+          <button disabled={props.isButtonDisabled} className={styles.userButton} onClick={onUnfollowClick}>Unfollow</button> : 
+          <button disabled={props.isButtonDisabled} className={styles.userButton} onClick={onFollowClick}>Follow</button>} 
       </div>
 
       <div className={styles.userItem__right}>

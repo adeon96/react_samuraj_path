@@ -1,15 +1,12 @@
 import { connect } from "react-redux";
-import {
-  toggleUserFollowAC, setUsersAC, setCurrentPageAC, setTotalUsersCountAC,
-  setToggleUsersFetchingAC,
-  toggleUserDisableAC
+import {setCurrentPageAC, getUsersThunkCreator,
+  followUserThunkCreator,
+  unfollowUserThunkCreator
 }
   from "../../redux/usersReducer";
 
 import UsersClass from './UsersClass';
-import usersAPI from "../../api/usersAPI";
 
-const api = new usersAPI();
 
 let mapStateToProps = (state) => {
 
@@ -25,63 +22,20 @@ let mapStateToProps = (state) => {
 let mapDispatchToProps = (dispatch) => {
 
   return {
-
-    /*toggleUserDisabled: (userId) => {
-      dispatch(toggleUserDisableAC(userId));
-    },*/
-
-    toggleUserFollow: (userId) => {
-
-      api.isUserFollowed(userId)
-        .then(response => {
-          //if we followed this user
-          if (response === true) {
-
-            //disable button
-            dispatch(toggleUserDisableAC(userId));
-
-            api.unfollowUser(userId)
-              .then(data => {
-                if (data.resultCode === 0) {
-                  dispatch(toggleUserFollowAC(userId));
-                }
-
-                //enable button
-                dispatch(toggleUserDisableAC(userId));
-              })
-          } else {
-
-            //disable button
-            dispatch(toggleUserDisableAC(userId));
-
-            api.followUser(userId)
-              .then(data => {
-                if (data.resultCode === 0) {
-                  dispatch(toggleUserFollowAC(userId));
-                }
-
-                //enable button
-                dispatch(toggleUserDisableAC(userId));
-              })
-          }
-        })
-
+    followUser: (userId) => {
+      dispatch(followUserThunkCreator(userId));
     },
 
-    setUsers: (users) => {
-      dispatch(setUsersAC(users));
+    unfollowUser: (userId) => {
+      dispatch(unfollowUserThunkCreator(userId));
+    },
+
+    getUsers: (currentPage, usersPerPage) => {
+      dispatch(getUsersThunkCreator(currentPage, usersPerPage))
     },
 
     setCurrentPage: (pageNum) => {
       dispatch(setCurrentPageAC(pageNum));
-    },
-
-    setTotalUsersNumber: (number) => {
-      dispatch(setTotalUsersCountAC(number));
-    },
-
-    setUsersFetching: (fetchingFlag) => {
-      dispatch(setToggleUsersFetchingAC(fetchingFlag));
     }
   }
 }

@@ -1,5 +1,5 @@
 import React from 'react';
-import { setProfileDataAC, setProfileDataFetchingAC } from '../../../redux/aboutReducer';
+import { getUserProfile } from '../../../redux/aboutReducer';
 
 import { connect } from 'react-redux';
 import About from './About';
@@ -14,35 +14,8 @@ class AboutContainer extends React.Component {
   componentDidMount() {
 
     let userId = this.props.match.params.userId;
-    if (!userId) {
+    this.props.getUserProfile(userId);
 
-      this.props.setProfileDataFetching(true);
-
-      //find out my id and setting my profile
-      this.api.authorizeUser()
-        .then(response => {
-          if (response.resultCode === 0) {
-            userId = response.data.id;
-
-            this.api.getUserProfile(userId)
-              .then(data => {
-                this.props.setProfileData(data);
-              })
-          }
-
-          this.props.setProfileDataFetching(false);
-        })
-
-      return;
-    }
-
-    this.props.setProfileDataFetching(true);
-
-    this.api.getUserProfile(userId)
-      .then(data => {
-        this.props.setProfileData(data);
-        this.props.setProfileDataFetching(false);
-      })
   }
 
   render() {
@@ -66,12 +39,8 @@ let mapStateToProps = (state) => {
 let mapDispatchToProps = (dispatch) => {
 
   return {
-    setProfileData: (data) => {
-      dispatch(setProfileDataAC(data));
-    },
-
-    setProfileDataFetching: (fetchingFlag) => {
-      dispatch(setProfileDataFetchingAC(fetchingFlag));
+    getUserProfile: (userId) => {
+      dispatch(getUserProfile(userId))
     }
   }
 
