@@ -6,7 +6,7 @@ const initialState = {
     {
       id: 1,
       name: "Roma",
-      image: 'https://lh4.googleusercontent.com/proxy/hoYnvK56YbWYiUdQh4Roxgvr7XUgZG0thbTyIjGLjdhDty9kRNZrTb64opGKwtqDRIudbcX25HkpNE5L_q9jP2T79Fo1SZX-bZNbvNLi-sZwTwAtpGlDszWeA3axCnILjz52Hw'
+      image: ''
     },
     { id: 2, name: "Dima" },
     {

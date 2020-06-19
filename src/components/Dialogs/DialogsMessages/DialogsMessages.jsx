@@ -3,9 +3,14 @@ import styles from './DialogsMessages.module.css';
 
 import MyMessageItem from './MessageItem/My/MyMessageItem';
 import OtherMessageItem from './MessageItem/Other/OtherMessageItem';
+import { Redirect } from 'react-router-dom';
 
 
 const DialogsMessages = (props) => {
+
+  if(!props.isAuth) {
+    return <Redirect to='/login' />
+  }
 
   let myMessages =
     props.state.myMessagesData.map(msg =>

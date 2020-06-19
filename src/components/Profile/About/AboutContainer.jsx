@@ -14,6 +14,10 @@ class AboutContainer extends React.Component {
   componentDidMount() {
 
     let userId = this.props.match.params.userId;
+    if(!userId) {
+      userId = this.props.myId;
+    }
+
     this.props.getUserProfile(userId);
 
   }
@@ -21,7 +25,7 @@ class AboutContainer extends React.Component {
   render() {
 
     return (
-      <About state={this.props.state} isFetching={this.props.isFetching} />
+      <About {...this.props} />
     );
   }
 
@@ -31,7 +35,9 @@ let mapStateToProps = (state) => {
 
   return {
     state: state.infoPage.aboutData,
-    isFetching: state.infoPage.isFetching
+    isFetching: state.infoPage.isFetching,
+    myId: state.auth.userId,
+    isAuth: state.auth.isAuth
   }
 
 };
