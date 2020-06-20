@@ -6,6 +6,8 @@ import About from './About';
 import { withRouter } from 'react-router-dom';
 import usersAPI from '../../../api/usersAPI';
 
+import { withAuthRedirect } from '../../../hoc/withAuthRedirect';
+
 
 class AboutContainer extends React.Component {
 
@@ -23,7 +25,6 @@ class AboutContainer extends React.Component {
   }
 
   render() {
-
     return (
       <About {...this.props} />
     );
@@ -31,13 +32,16 @@ class AboutContainer extends React.Component {
 
 }
 
+//Container component around AboutContainer
+//with Redirect logic
+let AuthRedirectComponent = withAuthRedirect(AboutContainer);
+
 let mapStateToProps = (state) => {
 
   return {
     state: state.infoPage.aboutData,
     isFetching: state.infoPage.isFetching,
-    myId: state.auth.userId,
-    isAuth: state.auth.isAuth
+    myId: state.auth.userId
   }
 
 };
@@ -52,6 +56,6 @@ let mapDispatchToProps = (dispatch) => {
 
 }
 
-let aboutContainerWithUrlParam = withRouter(AboutContainer);
+let aboutContainerWithUrlParam = withRouter(AuthRedirectComponent);
 
 export default connect(mapStateToProps, mapDispatchToProps)(aboutContainerWithUrlParam);

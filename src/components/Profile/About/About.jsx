@@ -2,13 +2,8 @@ import React from 'react';
 import styles from './About.module.css';
 import Preloader from '../../commom/Preloader';
 import defaultImg from '../../../assets/img/user_placeholder.jpg';
-import { Redirect } from 'react-router-dom';
 
 const About = (props) => {
-
-  if(!props.isAuth) {
-    return <Redirect to='/login' />
-  }
 
   return (
     <div className={styles.about}>
