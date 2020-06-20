@@ -7,6 +7,7 @@ import { withRouter } from 'react-router-dom';
 import usersAPI from '../../../api/usersAPI';
 
 import { withAuthRedirect } from '../../../hoc/withAuthRedirect';
+import { compose } from 'redux';
 
 
 class AboutContainer extends React.Component {
@@ -32,10 +33,6 @@ class AboutContainer extends React.Component {
 
 }
 
-//Container component around AboutContainer
-//with Redirect logic
-let AuthRedirectComponent = withAuthRedirect(AboutContainer);
-
 let mapStateToProps = (state) => {
 
   return {
@@ -56,6 +53,9 @@ let mapDispatchToProps = (dispatch) => {
 
 }
 
-let aboutContainerWithUrlParam = withRouter(AuthRedirectComponent);
 
-export default connect(mapStateToProps, mapDispatchToProps)(aboutContainerWithUrlParam);
+export default compose(
+  connect(mapStateToProps, mapDispatchToProps),
+  withRouter,
+  withAuthRedirect
+)(AboutContainer);

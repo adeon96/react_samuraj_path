@@ -7,6 +7,7 @@ import {setCurrentPageAC, getUsersThunkCreator,
 
 import UsersClass from './UsersClass';
 import { withAuthRedirect } from "../../hoc/withAuthRedirect";
+import { compose } from "redux";
 
 
 let mapStateToProps = (state) => {
@@ -41,7 +42,7 @@ let mapDispatchToProps = (dispatch) => {
   }
 }
 
-let withRedirectUsers = withAuthRedirect(UsersClass);
-
-const UsersContainer = connect(mapStateToProps, mapDispatchToProps)(withRedirectUsers);
-export default UsersContainer;
+export default compose(
+  connect(mapStateToProps, mapDispatchToProps),
+  withAuthRedirect
+)(UsersClass);

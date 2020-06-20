@@ -5,6 +5,7 @@ import DialogsMessages from './DialogsMessages';
 import { connect } from 'react-redux';
 
 import { withAuthRedirect } from '../../../hoc/withAuthRedirect';
+import { compose } from 'redux';
 
 let mapStateToProps = (state) => {
   return {
@@ -25,11 +26,7 @@ let mapDispatchToProps = (dispatch) => {
   }
 }
 
-//Container component around DialogsMessages
-//with Redirect logic
-let withRedirectComponent = withAuthRedirect(DialogsMessages);
-
-const DialogsMessagesContainer =
-  connect(mapStateToProps, mapDispatchToProps)(withRedirectComponent);
-
-export default DialogsMessagesContainer;
+export default compose(
+  connect(mapStateToProps, mapDispatchToProps),
+  withAuthRedirect
+)(DialogsMessages);
