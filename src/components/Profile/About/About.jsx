@@ -2,6 +2,7 @@ import React from 'react';
 import styles from './About.module.css';
 import Preloader from '../../commom/Preloader';
 import defaultImg from '../../../assets/img/user_placeholder.jpg';
+import ProfileStatus from './ProfileStatus/ProfileStatus';
 
 const About = (props) => {
 
@@ -46,7 +47,7 @@ const About = (props) => {
 
         <div className={styles.user_info}>
           <div className={styles.about_user}>
-            {props.state.aboutMe}
+            <ProfileStatus status={props.state.aboutMe} />       
           </div>
 
           <div className={styles.about_user_job}>
