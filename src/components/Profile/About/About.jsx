@@ -10,6 +10,9 @@ const About = (props) => {
     <div className={styles.about}>
       {props.isFetching ? <Preloader /> : ''}
 
+      <span>Status:</span>
+      <ProfileStatus status={props.status} updateStatus={props.updateStatus} />
+
       <div className={styles.user_profile}>
         <div className={styles.user_contacts}>
 
@@ -47,7 +50,7 @@ const About = (props) => {
 
         <div className={styles.user_info}>
           <div className={styles.about_user}>
-            <ProfileStatus status={props.state.aboutMe} />       
+            <p>{props.state.aboutMe}</p>       
           </div>
 
           <div className={styles.about_user_job}>

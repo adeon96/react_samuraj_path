@@ -1,5 +1,5 @@
 import React from 'react';
-import { getUserProfile } from '../../../redux/aboutReducer';
+import { getUserProfile, getUserStatus, updateUserStatus } from '../../../redux/aboutReducer';
 
 import { connect } from 'react-redux';
 import About from './About';
@@ -22,12 +22,13 @@ class AboutContainer extends React.Component {
     }
 
     this.props.getUserProfile(userId);
+    this.props.getUserStatus(userId);
 
   }
 
   render() {
     return (
-      <About {...this.props} />
+      <About {...this.props} updateStatus={this.props.updateUserStatus}/>
     );
   }
 
@@ -38,6 +39,7 @@ let mapStateToProps = (state) => {
   return {
     state: state.infoPage.aboutData,
     isFetching: state.infoPage.isFetching,
+    status: state.infoPage.status,
     myId: state.auth.userId
   }
 
@@ -48,6 +50,14 @@ let mapDispatchToProps = (dispatch) => {
   return {
     getUserProfile: (userId) => {
       dispatch(getUserProfile(userId))
+    },
+
+    getUserStatus: (userId) => {
+      dispatch(getUserStatus(userId))
+    },
+
+    updateUserStatus: (status) => {
+      dispatch(updateUserStatus(status))
     }
   }
 

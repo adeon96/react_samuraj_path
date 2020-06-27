@@ -2,6 +2,7 @@ import usersAPI from "../api/usersAPI";
 
 const SET_PROFILE_DATA = 'SET-PROFILE-DATA';
 const SET_PROFILE_DATA_FETCHING = 'SET-PROFILE-DATA-FETCHING';
+const SET_USER_STATUS = 'SET-USER-STATUS';
 
 const api = new usersAPI();
 
@@ -29,6 +30,7 @@ const initialState = {
     },
   },
 
+  status: '',
   isFetching: false
 };
 
@@ -45,6 +47,12 @@ const aboutReducer = (state = initialState, action) => {
       return {
         ...state,
         isFetching: action.fetchingFlag
+      }
+
+    case SET_USER_STATUS:
+      return {
+        ...state,
+        status: action.status
       }
 
     default:
@@ -66,6 +74,11 @@ export const setProfileDataFetchingAC = (fetchFlag) => ({
   fetchingFlag: fetchFlag
 });
 
+export const setStatusAC = (status) => ({
+  type: SET_USER_STATUS,
+  status: status
+});
+
 //Thunk
 export const getUserProfile = (userId) => (dispatch) => {
   dispatch(setProfileDataFetchingAC(true));
@@ -73,6 +86,28 @@ export const getUserProfile = (userId) => (dispatch) => {
   api.getUserProfile(userId)
     .then(response => {
       dispatch(setProfileDataAC(response.data));
+      dispatch(setProfileDataFetchingAC(false));
+    })
+}
+
+export const getUserStatus = (userId) => (dispatch) => {
+  dispatch(setProfileDataFetchingAC(true));
+
+  api.getUserStatus(userId)
+    .then(response => {
+      dispatch(setStatusAC(response.data));
+      dispatch(setProfileDataFetchingAC(false));
+    })
+}
+
+export const updateUserStatus = (status) => (dispatch) => {
+  dispatch(setProfileDataFetchingAC(true));
+
+  api.updateUserStatus(status)
+    .then(response => {
+      if(response.data.resultCode === 0) {
+        dispatch(setStatusAC(status));
+      }
       dispatch(setProfileDataFetchingAC(false));
     })
 }

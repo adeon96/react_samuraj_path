@@ -47,6 +47,20 @@ class usersAPI {
     )
   }
 
+  getUserStatus = (userId) => {
+    return (
+      this._instance.get('profile/status/' + userId)
+    )
+  }
+
+  updateUserStatus = (newStatus) => {
+    return (
+      this._instance.put('profile/status/', {
+        status: newStatus
+      })
+    )
+  }
+
 }
 
 export default usersAPI;
