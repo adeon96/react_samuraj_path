@@ -1,9 +1,9 @@
-import usersAPI from "../api/usersAPI";
+import authAPI from "../api/authAPI";
 
 const SET_USER_AUTH_DATA = 'SET_USER_AUTH_DATA';
 const TOGGLE_USER_AUTH_FETCHING = 'TOGGLE_USER_AUTH_FETCHING';
 
-const api = new usersAPI();
+const authApi = new authAPI();
 
 const initialState = {
   isFetching: false,
@@ -50,7 +50,7 @@ export const toggleUserAuthFetchingAC = (flag) => ({
 export const getUserAuthData = () => (dispatch) => {
   dispatch(toggleUserAuthFetchingAC(true));
 
-  api.authorizeUser()
+  authApi.authMe()
     .then(response => {
       
       if (response.data.resultCode === 0) {

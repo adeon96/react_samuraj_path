@@ -3,7 +3,22 @@ import styles from './DialogsMessages.module.css';
 
 import MyMessageItem from './MessageItem/My/MyMessageItem';
 import OtherMessageItem from './MessageItem/Other/OtherMessageItem';
+import { reduxForm, Field } from 'redux-form';
 
+const AddMessageForm = (props) => {
+  return(
+    <form onSubmit={props.handleSubmit}>
+      <div>
+        <Field component={"textarea"} name={"messageTextarea"} placeholder={"Your message..."} />
+      </div>
+      <div>
+        <button>Send</button>
+      </div>
+    </form>
+  )
+}
+
+const ReduxAddMessageForm = reduxForm({form: 'newMessageForm'})(AddMessageForm);
 
 const DialogsMessages = (props) => {
 
@@ -15,15 +30,8 @@ const DialogsMessages = (props) => {
     props.state.otherMessagesData.map(msg =>
       <OtherMessageItem key={msg.id} text={msg.text} />);
 
-
-  let onMessageSend = () => {
-    props.sendMessage();
-  }
-
-
-  let onMessageChange = (event) => {
-    let msgText = event.target.value;
-    props.updateNewMessageText(msgText);
+  let onAddMessageSubmit = (formData) => {
+    props.sendMessage(formData.messageTextarea);
   }
 
 
@@ -32,12 +40,7 @@ const DialogsMessages = (props) => {
       {myMessages}
       {otherMessages}
 
-      <div className={styles.sendForm}>
-        <textarea placeholder='Write something...'
-          value={props.newMessageText}
-          onChange={onMessageChange} />
-        <button onClick={onMessageSend}>Send</button>
-      </div>
+      <ReduxAddMessageForm onSubmit={onAddMessageSubmit} />
     </div>
   );
 }

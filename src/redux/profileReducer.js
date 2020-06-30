@@ -1,5 +1,4 @@
 const ADD_POST = 'ADD-POST';
-const UPDATE_NEW_POST_TEXT = 'UPDATE-NEW-POST-TEXT';
 const LIKE_POST = 'LIKE-POST';
 
 const initialState = {
@@ -31,16 +30,9 @@ const initialState = {
     },
   ],
 
-  newPostText: 'Today I have...'
-
 };
 
 const profileReducer = (state = initialState, action) => {
-
-  /*console.log("Profile reducer...");
-  console.log("state: " + state);
-  console.log("action: " + action.type);
-  console.log("***********");*/
 
   switch (action.type) {
     case ADD_POST:
@@ -49,21 +41,13 @@ const profileReducer = (state = initialState, action) => {
 
       let newPost = {
         id: newId,
-        text: state.newPostText,
+        text: action.postText,
         likes: 0
       };
 
       return { 
         ...state,
-        myPostsData: [newPost, ...state.myPostsData],
-        newPostText: ''
-      };
-    
-
-    case UPDATE_NEW_POST_TEXT:
-      return { 
-        ...state,
-        newPostText: action.newText
+        myPostsData: [newPost, ...state.myPostsData]
       };
 
     case LIKE_POST:
@@ -85,9 +69,8 @@ const profileReducer = (state = initialState, action) => {
 
 export default profileReducer;
 
-export const addPostActionCreator = () => ({ type: ADD_POST });
-export const updateNewPostTextActionCreator = (nText) => (
-  { type: UPDATE_NEW_POST_TEXT, newText: nText });
+export const addPostActionCreator = (postText) => ({ 
+  type: ADD_POST, postText });
 
 export const likePostAC = (pstId) => ({
   type: LIKE_POST,

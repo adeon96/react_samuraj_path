@@ -28,13 +28,6 @@ class usersAPI {
 
   }
 
-  authorizeUser = () => {
-
-    return (
-      this._instance.get('auth/me')
-    )
-  }
-
   followUser = (userId) => {
     return (
       this._instance.post('follow/' + userId)

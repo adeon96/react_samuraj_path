@@ -2,6 +2,22 @@ import React from 'react';
 import styles from './MyPosts.module.css';
 
 import Post from './Post/Post';
+import { reduxForm, Field } from 'redux-form';
+
+const AddPostForm = (props) => {
+  return (
+    <form onSubmit={props.handleSubmit}>
+      <div>
+        <Field component={"textarea"} name={"postTextarea"} placeholder={"What's new?.."} />
+      </div>
+      <div> 
+        <button>Send</button>
+      </div>
+    </form>
+  )
+}
+
+const ReduxAddPostForm = reduxForm({form: 'addPost'})(AddPostForm);
 
 /* props -> array of my posts (myPostsData) */
 const MyPosts = (props) => {
@@ -16,27 +32,15 @@ const MyPosts = (props) => {
     likePost={props.likePost} />);
 
 
-  let onAddPost = () => {
-    props.addPost();
-  }
-
-  let onPostChange = (event) => {
-    let text = event.target.value;
-    props.updateNewPostText(text);
+  let onAddPostSubmit = (formData) => {
+    props.addPost(formData.postTextarea);
   }
 
   return (
     <div className={styles.myPosts}>
       <h4>My posts</h4>
 
-      <div className={styles.myPosts__form}>
-        <textarea className={styles.form__textarea}
-          placeholder="What's new?.."
-          onChange={onPostChange}
-          value={props.newPostText} />
-
-        <button onClick={onAddPost} className={styles.form__button}>Add post</button>
-      </div>
+      <ReduxAddPostForm onSubmit={onAddPostSubmit} />
 
       <div className={styles.myPosts__items}>
         {myPosts}
