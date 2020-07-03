@@ -1,0 +1,7 @@
+.formElement_error {
+  border: 2px solid red;
+}
+
+.formElement_error_text {
+  color: red;
+}
