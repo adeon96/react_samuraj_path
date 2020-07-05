@@ -3,6 +3,7 @@ import Header from './Header';
 import { getUserAuthData } from '../../redux/authReducer';
 import { connect } from 'react-redux';
 import usersAPI from '../../api/usersAPI';
+import { logout } from '../../redux/authReducer';
 
 class HeaderContainer extends React.Component {
 
@@ -35,6 +36,10 @@ const mapDispatchToProps = (dispatch) => {
   return {
     getUserAuthData: () => {
       dispatch(getUserAuthData());
+    },
+
+    logoutUser: () => {
+      dispatch(logout())
     }
   }
 

@@ -18,8 +18,7 @@ const authReducer = (state = initialState, action) => {
     case SET_USER_AUTH_DATA:
       return {
         ...state,
-        ...action.userData,
-        isAuth: true
+        ...action.payload
       }
 
     case TOGGLE_USER_AUTH_FETCHING:
@@ -35,9 +34,9 @@ const authReducer = (state = initialState, action) => {
 
 export default authReducer;
 
-export const setUserAuthDataAC = (userId, userEmail, userLogin) => ({
+export const setUserAuthDataAC = (userId, userEmail, userLogin, isAuth) => ({
   type: SET_USER_AUTH_DATA,
-  userData: { userId, userEmail, userLogin }
+  payload: { userId, userEmail, userLogin, isAuth }
 });
 
 export const toggleUserAuthFetchingAC = (flag) => ({
@@ -56,9 +55,27 @@ export const getUserAuthData = () => (dispatch) => {
       if (response.data.resultCode === 0) {
         let { id, email, login } = response.data.data;
 
-        dispatch(setUserAuthDataAC(id, email, login));
+        dispatch(setUserAuthDataAC(id, email, login, true));
       }
 
       dispatch(toggleUserAuthFetchingAC(false));
+    })
+}
+
+export const login = (email, password, rememberMe) => (dispatch) => {
+  authApi.authUser(email, password, rememberMe)
+    .then(response => {
+      if (response.data.resultCode === 0) {
+        dispatch(getUserAuthData())
+      }
+    })
+}
+
+export const logout = () => (dispatch) => {
+  authApi.logout()
+    .then(response => {
+      if (response.data.resultCode === 0) {
+        dispatch(setUserAuthDataAC(null, null, null, false))
+      }
     })
 }

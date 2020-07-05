@@ -17,7 +17,7 @@ class authAPI {
     )
   }
 
-  authUser = (userEmail, userPassword, rememberFlag) => {
+  authUser = (userEmail, userPassword, rememberFlag = false) => {
 
     return (
       this._instance.post('/auth/login', {
@@ -27,6 +27,12 @@ class authAPI {
       })
     )
 
+  }
+
+  logout = () => {
+    return (
+      this._instance.delete('/auth/login')
+    )
   }
 
 }

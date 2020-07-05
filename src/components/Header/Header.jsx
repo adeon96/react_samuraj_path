@@ -6,6 +6,10 @@ import { NavLink } from 'react-router-dom';
 const Header = (props) => {
   //window.headerProps = props;
 
+  const onLogout = () => {
+    props.logoutUser();
+  }
+
   return (<div className={styles.header}>
 
     {props.isFetching ? <Preloader /> : ''}
@@ -13,7 +17,14 @@ const Header = (props) => {
     <header>
       <h4>Welcome to our network!</h4>
 
-      {props.isAuth ? <p>{props.userLogin}</p> : 
+      {props.isAuth ?
+        <div>
+          <p>{props.userLogin}</p> 
+          <button onClick={onLogout}>Logout</button>
+        </div>
+
+        :
+
         <NavLink to='/login'>Login</NavLink> }
       
     </header>
