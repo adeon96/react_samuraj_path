@@ -1,6 +1,6 @@
 import React from 'react';
 import styles from './Header.module.css';
-import Preloader from './../commom/Preloader';
+import Preloader from './../common/Preloader';
 import { NavLink } from 'react-router-dom';
 
 const Header = (props) => {

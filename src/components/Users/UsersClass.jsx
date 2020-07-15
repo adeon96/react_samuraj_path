@@ -3,7 +3,7 @@ import styles from './Users.module.css';
 
 import UserItem from './UserItem/UserItem';
 import defaultImg from '../../assets/img/user_placeholder.jpg';
-import Preloader from '../commom/Preloader';
+import Preloader from '../common/Preloader';
 
 import usersAPI from '../../api/usersAPI';
 

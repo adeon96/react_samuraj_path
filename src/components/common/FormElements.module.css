@@ -1,0 +1,14 @@
+.formElement_error {
+  border: 2px solid red;
+}
+
+.formElement_error_text {
+  color: red;
+}
+
+.formSubmissionError {
+  border: 2px solid red;
+  padding: 10px;
+  color: red;
+  margin-top: 10px;
+}

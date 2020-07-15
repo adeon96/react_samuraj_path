@@ -4,7 +4,7 @@ import styles from './DialogsMessages.module.css';
 import MyMessageItem from './MessageItem/My/MyMessageItem';
 import OtherMessageItem from './MessageItem/Other/OtherMessageItem';
 import { reduxForm, Field } from 'redux-form';
-import { FormElement } from '../../commom/FormElements';
+import { FormElement } from '../../common/FormElements';
 import { required, maxLengthCreator } from '../../../utils/validators';
 
 const maxLength50 = maxLengthCreator(50);

@@ -1,10 +1,11 @@
 import React from 'react';
 import { reduxForm, Field } from 'redux-form';
-import { FormElement } from '../commom/FormElements';
+import { FormElement } from '../common/FormElements';
 import { required } from '../../utils/validators';
 import { login } from '../../redux/authReducer';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
+import styles from '../common/FormElements.module.css';
 
 const Input = FormElement("input");
 
@@ -26,6 +27,12 @@ const LoginForm = (props) => {
       <div>
         <button>Login</button>
       </div>
+
+      {props.error &&
+        <div className={styles.formSubmissionError}>
+          {props.error}
+        </div>
+      }
     </form>
   )
 }

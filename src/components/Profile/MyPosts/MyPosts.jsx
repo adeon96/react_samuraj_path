@@ -4,7 +4,7 @@ import styles from './MyPosts.module.css';
 import Post from './Post/Post';
 import { reduxForm, Field } from 'redux-form';
 import { required, maxLengthCreator } from '../../../utils/validators';
-import { FormElement } from '../../commom/FormElements';
+import { FormElement } from '../../common/FormElements';
 
 let maxLength10 = maxLengthCreator(10);
 const Textarea = FormElement("textarea");

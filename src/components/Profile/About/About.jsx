@@ -1,6 +1,6 @@
 import React from 'react';
 import styles from './About.module.css';
-import Preloader from '../../commom/Preloader';
+import Preloader from '../../common/Preloader';
 import defaultImg from '../../../assets/img/user_placeholder.jpg';
 import ProfileStatus from './ProfileStatus/ProfileStatus';
 
