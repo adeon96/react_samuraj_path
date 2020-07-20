@@ -6,7 +6,6 @@ import {setCurrentPageAC, getUsersThunkCreator,
   from "../../redux/usersReducer";
 
 import UsersClass from './UsersClass';
-import { withAuthRedirect } from "../../hoc/withAuthRedirect";
 import { compose } from "redux";
 
 
@@ -43,6 +42,5 @@ let mapDispatchToProps = (dispatch) => {
 }
 
 export default compose(
-  connect(mapStateToProps, mapDispatchToProps),
-  withAuthRedirect
+  connect(mapStateToProps, mapDispatchToProps)
 )(UsersClass);

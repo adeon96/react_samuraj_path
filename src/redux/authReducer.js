@@ -50,7 +50,7 @@ export const toggleUserAuthFetchingAC = (flag) => ({
 export const getUserAuthData = () => (dispatch) => {
   dispatch(toggleUserAuthFetchingAC(true));
 
-  authApi.authMe()
+  return authApi.authMe()
     .then(response => {
       
       if (response.data.resultCode === 0) {
