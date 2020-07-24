@@ -7,16 +7,17 @@ import {setCurrentPageAC, getUsersThunkCreator,
 
 import UsersClass from './UsersClass';
 import { compose } from "redux";
+import { getUsers, getTotalUsersNumber, getUsersPerPage, getIsFetching, getCurrentPage } from "../../redux/usersSelectors";
 
 
 let mapStateToProps = (state) => {
 
   return {
-    usersArr: state.usersPage.users,
-    totalUsersNumber: state.usersPage.totalUsersNumber,
-    usersPerPage: state.usersPage.usersPerPage,
-    currentPage: state.usersPage.currentPage,
-    isFetching: state.usersPage.isFetching
+    usersArr: getUsers(state),
+    totalUsersNumber: getTotalUsersNumber(state),
+    usersPerPage: getUsersPerPage(state),
+    currentPage: getCurrentPage(state),
+    isFetching: getIsFetching(state)
   }
 }
 

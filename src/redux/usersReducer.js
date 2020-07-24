@@ -22,6 +22,7 @@ const initialState = {
 const usersReducer = (state = initialState, action) => {
 
   switch (action.type) {
+
     case TOGGLE_USER_DISABLE:
       return {
         ...state,

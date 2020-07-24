@@ -27,6 +27,7 @@ class AboutContainer extends React.Component {
   }
 
   render() {
+
     return (
       <About {...this.props} updateStatus={this.props.updateUserStatus}/>
     );
