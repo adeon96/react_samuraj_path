@@ -2,16 +2,19 @@ import React from 'react';
 import styles from './About.module.css';
 import Preloader from '../../common/Preloader';
 import defaultImg from '../../../assets/img/user_placeholder.jpg';
-import ProfileStatus from './ProfileStatus/ProfileStatus';
+//import ProfileStatus from './ProfileStatus/ProfileStatus';
+import ProfileStatusWithHooks from './ProfileStatus/ProfileStatusWithHooks';
 
 const About = (props) => {
+
+  window.aboutProps = props;
 
   return (
     <div className={styles.about}>
       {props.isFetching ? <Preloader /> : ''}
 
       <span>Status:</span>
-      <ProfileStatus status={props.status} updateStatus={props.updateStatus} />
+      <ProfileStatusWithHooks status={props.status} updateStatus={props.updateStatus} />
 
       <div className={styles.user_profile}>
         <div className={styles.user_contacts}>
