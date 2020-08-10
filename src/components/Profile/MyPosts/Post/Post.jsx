@@ -10,6 +10,10 @@ const Post = (props) => {
     props.likePost(props.id);
   }
 
+  let onPostDelete = () => {
+    props.deletePost(props.id);
+  }
+
   return (
     <div className={styles.post}>
       <div className={styles.post__image}>
@@ -25,6 +29,10 @@ const Post = (props) => {
       <div className={styles.like__btn}>
         <button onClick={onPostLike}>Like</button>
         <span>{props.current_likes}</span>
+      </div>
+
+      <div className={styles.delete__btn}>
+        <button onClick={onPostDelete}>Delete</button>
       </div>
     </div>
   );

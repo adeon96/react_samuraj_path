@@ -1,5 +1,6 @@
 const ADD_POST = 'ADD-POST';
 const LIKE_POST = 'LIKE-POST';
+const DELETE_POST = 'DELETE-POST';
 
 const initialState = {
   myPostsData: [
@@ -62,6 +63,12 @@ const profileReducer = (state = initialState, action) => {
         })
       }
 
+    case DELETE_POST:
+      return {
+        ...state,
+        myPostsData: state.myPostsData.filter(postItem => postItem.id !== action.postId)
+      };
+
     default:
       return state;
   }
@@ -76,3 +83,8 @@ export const likePostAC = (pstId) => ({
   type: LIKE_POST,
   postId: pstId
 });
+
+export const deletePostAC = (pstId) => ({
+  type: DELETE_POST,
+  postId: pstId
+})

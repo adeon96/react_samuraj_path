@@ -1,5 +1,5 @@
 import MyPosts from "./MyPosts";
-import { addPostActionCreator, likePostAC }
+import { addPostActionCreator, likePostAC, deletePostAC }
   from '../../../redux/profileReducer';
 
 import { connect } from 'react-redux';
@@ -22,6 +22,10 @@ let mapDispatchToProps = (dispatch) => {
 
     likePost: (postId) => {
       dispatch(likePostAC(postId));
+    },
+
+    deletePost: (postId) => {
+      dispatch(deletePostAC(postId));
     }
   }
 

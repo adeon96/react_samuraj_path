@@ -4,7 +4,6 @@ import Preloader from './../common/Preloader';
 import { NavLink } from 'react-router-dom';
 
 const Header = (props) => {
-  //window.headerProps = props;
 
   const onLogout = () => {
     props.logoutUser();

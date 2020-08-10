@@ -5,9 +5,7 @@ import defaultImg from '../../../assets/img/user_placeholder.jpg';
 //import ProfileStatus from './ProfileStatus/ProfileStatus';
 import ProfileStatusWithHooks from './ProfileStatus/ProfileStatusWithHooks';
 
-const About = (props) => {
-
-  window.aboutProps = props;
+const About = React.memo((props) => {
 
   return (
     <div className={styles.about}>
@@ -65,6 +63,6 @@ const About = (props) => {
 
     </div>
   );
-}
+})
 
 export default About;

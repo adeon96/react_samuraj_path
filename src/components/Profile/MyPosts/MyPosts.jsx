@@ -28,6 +28,8 @@ const ReduxAddPostForm = reduxForm({form: 'addPost'})(AddPostForm);
 /* props -> array of my posts (myPostsData) */
 const MyPosts = (props) => {
 
+  console.log("My posts component");
+
   /* Converting array from objects to components */
   let myPosts = props.state.map(post => <Post key={post.id}
     id={post.id}
@@ -35,7 +37,8 @@ const MyPosts = (props) => {
     text={post.text.length > 200 ?
       post.text.substring(0, 200) + "... Read more" : post.text}
     current_likes={post.likes}
-    likePost={props.likePost} />);
+    likePost={props.likePost}
+    deletePost={props.deletePost} />);
 
 
   let onAddPostSubmit = (formData) => {
